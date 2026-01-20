@@ -1,0 +1,443 @@
+{
+  "version": "1.0",
+  "exported_at": "2026-01-19T00:00:00Z",
+  "data": {
+    "genres": [
+      {
+        "id": "genre_1950s",
+        "name": "1950s",
+        "parent_id": null,
+        "level": 1,
+        "sort_order": 1,
+        "description": "Rockabilly & Doo-Wop 时代",
+        "era_prompt": "1950s style, mono recording, slapback delay on vocals, doo-wop harmony, walking bass, acoustic drums, raw energy"
+      },
+      {
+        "id": "genre_1950s_doowop",
+        "name": "Doo-Wop",
+        "parent_id": "genre_1950s",
+        "level": 2,
+        "sort_order": 1,
+        "description": "人声和声主导的浪漫风格"
+      },
+      {
+        "id": "genre_1950s_rockabilly",
+        "name": "Rockabilly",
+        "parent_id": "genre_1950s",
+        "level": 2,
+        "sort_order": 2,
+        "description": "Blues 遇见 Country，摇滚乐的诞生"
+      },
+      {
+        "id": "genre_1960s",
+        "name": "1960s",
+        "parent_id": null,
+        "level": 1,
+        "sort_order": 2,
+        "description": "Psychedelia & Motown 时代",
+        "era_prompt": "1960s style, british invasion, psychedelic rock, motown soul, tambourine, rich vocal harmonies, vintage tube saturation"
+      },
+      {
+        "id": "genre_1960s_psychedelic",
+        "name": "Psychedelic Rock",
+        "parent_id": "genre_1960s",
+        "level": 2,
+        "sort_order": 1,
+        "description": "迷幻摇滚，实验性声音"
+      },
+      {
+        "id": "genre_1960s_motown",
+        "name": "Motown Soul",
+        "parent_id": "genre_1960s",
+        "level": 2,
+        "sort_order": 2,
+        "description": "底特律灵魂乐"
+      },
+      {
+        "id": "genre_1960s_british",
+        "name": "British Invasion",
+        "parent_id": "genre_1960s",
+        "level": 2,
+        "sort_order": 3,
+        "description": "英伦入侵"
+      },
+      {
+        "id": "genre_1970s",
+        "name": "1970s",
+        "parent_id": null,
+        "level": 1,
+        "sort_order": 3,
+        "description": "Funk, Disco & Punk 时代",
+        "era_prompt": "1970s style, funk groove, disco strings, wah-wah guitar, punchy bassline, analog warmth, studio 54 vibe"
+      },
+      {
+        "id": "genre_1970s_disco",
+        "name": "Disco",
+        "parent_id": "genre_1970s",
+        "level": 2,
+        "sort_order": 1,
+        "description": "迪斯科舞曲"
+      },
+      {
+        "id": "genre_1970s_funk",
+        "name": "Funk",
+        "parent_id": "genre_1970s",
+        "level": 2,
+        "sort_order": 2,
+        "description": "放克音乐"
+      },
+      {
+        "id": "genre_1970s_hardrock",
+        "name": "Hard Rock",
+        "parent_id": "genre_1970s",
+        "level": 2,
+        "sort_order": 3,
+        "description": "硬摇滚"
+      },
+      {
+        "id": "genre_1970s_punk",
+        "name": "Punk Rock",
+        "parent_id": "genre_1970s",
+        "level": 2,
+        "sort_order": 4,
+        "description": "朋克摇滚"
+      },
+      {
+        "id": "genre_1970s_yacht",
+        "name": "Yacht Rock",
+        "parent_id": "genre_1970s",
+        "level": 2,
+        "sort_order": 5,
+        "description": "游艇摇滚，轻柔摇滚"
+      },
+      {
+        "id": "genre_1980s",
+        "name": "1980s",
+        "parent_id": null,
+        "level": 1,
+        "sort_order": 4,
+        "description": "Synthpop & Hair Metal 时代",
+        "era_prompt": "1980s style, synthwave, gated reverb snare, yamaha dx7, drum machine, neon atmosphere, guitar solo, chorus effect"
+      },
+      {
+        "id": "genre_1980s_synthwave",
+        "name": "Synthwave / Retrowave",
+        "parent_id": "genre_1980s",
+        "level": 2,
+        "sort_order": 1,
+        "description": "合成器浪潮"
+      },
+      {
+        "id": "genre_1980s_newwave",
+        "name": "New Wave",
+        "parent_id": "genre_1980s",
+        "level": 2,
+        "sort_order": 2,
+        "description": "新浪潮"
+      },
+      {
+        "id": "genre_1980s_postpunk",
+        "name": "Post-Punk / Goth",
+        "parent_id": "genre_1980s",
+        "level": 2,
+        "sort_order": 3,
+        "description": "后朋克/哥特"
+      },
+      {
+        "id": "genre_1980s_citypop",
+        "name": "City Pop",
+        "parent_id": "genre_1980s",
+        "level": 2,
+        "sort_order": 4,
+        "description": "日本城市流行"
+      },
+      {
+        "id": "genre_1990s",
+        "name": "1990s",
+        "parent_id": null,
+        "level": 1,
+        "sort_order": 5,
+        "description": "Hip-Hop & Grunge 时代",
+        "era_prompt": "1990s style, boom bap beats, sampled loops, grunge distortion, lo-fi aesthetic, heavy sub-bass, angst vocals"
+      },
+      {
+        "id": "genre_1990s_boombap",
+        "name": "Boom Bap Hip-Hop",
+        "parent_id": "genre_1990s",
+        "level": 2,
+        "sort_order": 1,
+        "description": "90年代嘻哈"
+      },
+      {
+        "id": "genre_1990s_grunge",
+        "name": "Grunge / Alternative",
+        "parent_id": "genre_1990s",
+        "level": 2,
+        "sort_order": 2,
+        "description": "垃圾摇滚/另类摇滚"
+      },
+      {
+        "id": "genre_1990s_eurodance",
+        "name": "Eurodance",
+        "parent_id": "genre_1990s",
+        "level": 2,
+        "sort_order": 3,
+        "description": "欧陆舞曲"
+      },
+      {
+        "id": "genre_2000s",
+        "name": "2000s",
+        "parent_id": null,
+        "level": 1,
+        "sort_order": 6,
+        "description": "Pop-Punk & R&B 时代",
+        "era_prompt": "2000s style, pop punk energy, millennium r&b, polished production, heavy compression, acoustic guitar intro, radio hit"
+      },
+      {
+        "id": "genre_2000s_poppunk",
+        "name": "Pop Punk",
+        "parent_id": "genre_2000s",
+        "level": 2,
+        "sort_order": 1,
+        "description": "流行朋克"
+      },
+      {
+        "id": "genre_2000s_numetal",
+        "name": "Nu Metal",
+        "parent_id": "genre_2000s",
+        "level": 2,
+        "sort_order": 2,
+        "description": "新金属"
+      },
+      {
+        "id": "genre_2010s",
+        "name": "2010s",
+        "parent_id": null,
+        "level": 1,
+        "sort_order": 7,
+        "description": "EDM & Trap 时代",
+        "era_prompt": "2010s style, edm drop, trap hi-hat rolls, massive 808 bass, sidechain compression, pitch-shifted vocals, tropical house"
+      },
+      {
+        "id": "genre_2010s_edm",
+        "name": "Big Room EDM",
+        "parent_id": "genre_2010s",
+        "level": 2,
+        "sort_order": 1,
+        "description": "大房间电子舞曲"
+      },
+      {
+        "id": "genre_2010s_trap",
+        "name": "Trap",
+        "parent_id": "genre_2010s",
+        "level": 2,
+        "sort_order": 2,
+        "description": "陷阱音乐"
+      },
+      {
+        "id": "genre_2010s_lofi",
+        "name": "Lo-Fi Hip Hop",
+        "parent_id": "genre_2010s",
+        "level": 2,
+        "sort_order": 3,
+        "description": "低保真嘻哈"
+      },
+      {
+        "id": "genre_2020s",
+        "name": "2020s",
+        "parent_id": null,
+        "level": 1,
+        "sort_order": 8,
+        "description": "Hyperpop & Viral 时代",
+        "era_prompt": "2020s style, hyperpop, glitchcore, distorted bass, tiktok viral hook, genre-blending, sped up, nightcore influence"
+      },
+      {
+        "id": "genre_2020s_hyperpop",
+        "name": "Hyperpop",
+        "parent_id": "genre_2020s",
+        "level": 2,
+        "sort_order": 1,
+        "description": "超流行"
+      },
+      {
+        "id": "genre_2020s_phonk",
+        "name": "Drift Phonk",
+        "parent_id": "genre_2020s",
+        "level": 2,
+        "sort_order": 2,
+        "description": "漂移放克"
+      },
+      {
+        "id": "genre_2020s_bedroom",
+        "name": "Bedroom Pop",
+        "parent_id": "genre_2020s",
+        "level": 2,
+        "sort_order": 3,
+        "description": "卧室流行"
+      }
+    ],
+    "styles": [
+      {
+        "id": "style_001",
+        "name": "Doo-Wop Romance",
+        "tags": ["doo-wop", "50s ballad", "finger snaps", "male quartet", "romantic", "slow dance"],
+        "genre_id": "genre_1950s_doowop",
+        "description": "经典的 50 年代浪漫情歌风格",
+        "bpm_range": "60-80"
+      },
+      {
+        "id": "style_002",
+        "name": "Rockabilly Jive",
+        "tags": ["rockabilly", "upbeat", "double bass slap", "twangy guitar", "elvis style", "12-bar blues"],
+        "genre_id": "genre_1950s_rockabilly",
+        "description": "摇滚乐的起源风格",
+        "bpm_range": "140-180"
+      },
+      {
+        "id": "style_003",
+        "name": "Psychedelic Rock",
+        "tags": ["psychedelic rock", "60s", "sitar", "fuzz guitar", "dreamy vocals", "kaleidoscope"],
+        "genre_id": "genre_1960s_psychedelic",
+        "description": "60年代迷幻摇滚",
+        "bpm_range": "100-130"
+      },
+      {
+        "id": "style_004",
+        "name": "Motown Soul",
+        "tags": ["motown", "northern soul", "brass section", "groovy bass", "tambourine", "female lead"],
+        "genre_id": "genre_1960s_motown",
+        "description": "底特律灵魂乐风格",
+        "bpm_range": "100-120"
+      },
+      {
+        "id": "style_005",
+        "name": "British Invasion",
+        "tags": ["beat music", "liverpool sound", "jangly guitar", "catchy chorus", "harmonica"],
+        "genre_id": "genre_1960s_british",
+        "description": "英伦入侵时期的流行摇滚",
+        "bpm_range": "120-140"
+      },
+      {
+        "id": "style_006",
+        "name": "Classic Disco",
+        "tags": ["disco", "four-on-the-floor", "string hits", "funky bass octave", "falsetto", "party"],
+        "genre_id": "genre_1970s_disco",
+        "description": "经典迪斯科舞曲",
+        "bpm_range": "110-130"
+      },
+      {
+        "id": "style_007",
+        "name": "Hard Rock Anthem",
+        "tags": ["hard rock", "70s", "distorted riffs", "powerful drums", "high vocals", "arena rock"],
+        "genre_id": "genre_1970s_hardrock",
+        "description": "70年代硬摇滚",
+        "bpm_range": "120-140"
+      },
+      {
+        "id": "style_008",
+        "name": "Yacht Rock",
+        "tags": ["yacht rock", "smooth", "rhodes piano", "saxophone solo", "breezy", "laid back"],
+        "genre_id": "genre_1970s_yacht",
+        "description": "轻柔摇滚风格",
+        "bpm_range": "90-110"
+      },
+      {
+        "id": "style_009",
+        "name": "Synthwave / Outrun",
+        "tags": ["synthwave", "retrowave", "arpeggiated bass", "analog synth", "driving beat", "night drive"],
+        "genre_id": "genre_1980s_synthwave",
+        "description": "复古电子合成器风格",
+        "bpm_range": "100-120"
+      },
+      {
+        "id": "style_010",
+        "name": "Japanese City Pop",
+        "tags": ["city pop", "j-pop 80s", "funky bass", "plastic love vibe", "female vocal", "urban"],
+        "genre_id": "genre_1980s_citypop",
+        "description": "80年代日本城市流行",
+        "bpm_range": "100-120"
+      },
+      {
+        "id": "style_011",
+        "name": "Post-Punk / Goth",
+        "tags": ["post-punk", "goth rock", "flanger bass", "deep vocals", "dark atmosphere", "drum machine"],
+        "genre_id": "genre_1980s_postpunk",
+        "description": "后朋克哥特风格",
+        "bpm_range": "110-130"
+      },
+      {
+        "id": "style_012",
+        "name": "Boom Bap Hip-Hop",
+        "tags": ["90s hip hop", "boom bap", "jazz samples", "scratching", "mpc60 drums", "street vibe"],
+        "genre_id": "genre_1990s_boombap",
+        "description": "90年代经典嘻哈",
+        "bpm_range": "85-100"
+      },
+      {
+        "id": "style_013",
+        "name": "Seattle Grunge",
+        "tags": ["grunge", "90s alternative", "distorted chords", "loud-quiet-loud dynamics", "angst"],
+        "genre_id": "genre_1990s_grunge",
+        "description": "西雅图垃圾摇滚",
+        "bpm_range": "100-130"
+      },
+      {
+        "id": "style_014",
+        "name": "Eurodance",
+        "tags": ["eurodance", "90s dance", "female hook", "male rap verse", "high bpm", "synth stab"],
+        "genre_id": "genre_1990s_eurodance",
+        "description": "90年代欧陆舞曲",
+        "bpm_range": "130-150"
+      },
+      {
+        "id": "style_015",
+        "name": "Pop Punk",
+        "tags": ["pop punk", "2000s", "power chords", "fast tempo", "teenage rebellion", "nasal vocals"],
+        "genre_id": "genre_2000s_poppunk",
+        "description": "2000年代流行朋克",
+        "bpm_range": "160-190"
+      },
+      {
+        "id": "style_016",
+        "name": "Nu Metal",
+        "tags": ["nu metal", "drop tuning guitar", "rapping", "turntable scratch", "aggressive", "angst"],
+        "genre_id": "genre_2000s_numetal",
+        "description": "新金属风格",
+        "bpm_range": "90-130"
+      },
+      {
+        "id": "style_017",
+        "name": "Festival EDM",
+        "tags": ["big room house", "edm festival", "build up", "heavy drop", "supersaw synths", "jump"],
+        "genre_id": "genre_2010s_edm",
+        "description": "音乐节电子舞曲",
+        "bpm_range": "125-130"
+      },
+      {
+        "id": "style_018",
+        "name": "Lofi Hip Hop",
+        "tags": ["lofi hip hop", "study beats", "vinyl crackle", "chill", "downtempo", "nostalgic"],
+        "genre_id": "genre_2010s_lofi",
+        "description": "低保真嘻哈学习音乐",
+        "bpm_range": "70-90"
+      },
+      {
+        "id": "style_019",
+        "name": "Cyberpunk Phonk",
+        "tags": ["drift phonk", "cowbell", "distorted 808", "memphis rap samples", "high energy"],
+        "genre_id": "genre_2020s_phonk",
+        "description": "赛博朋克漂移音乐",
+        "bpm_range": "130-145"
+      },
+      {
+        "id": "style_020",
+        "name": "Hyperpop",
+        "tags": ["hyperpop", "autotune", "metallic snare", "glitch", "bubblegum bass", "chaotic"],
+        "genre_id": "genre_2020s_hyperpop",
+        "description": "超流行实验电子",
+        "bpm_range": "140-170"
+      }
+    ],
+    "folders": []
+  }
+}

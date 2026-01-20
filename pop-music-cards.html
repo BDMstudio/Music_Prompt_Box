@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suno Curator Board V4</title>
+    <!-- Bootstrap 5 & Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <!-- Google Fonts for better typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-color: #09090b;
+            --sidebar-bg: #101012;
+            --card-bg: #18181b;
+            --border-color: #27272a;
+            --accent-color: #8b5cf6; /* Suno Purple */
+            --accent-glow: rgba(139, 92, 246, 0.3);
+            --text-main: #e4e4e7;
+            --text-sub: #a1a1aa;
+            
+            /* Specific Era Colors (Subtle hints) */
+            --era-50s: #f59e0b;
+            --era-80s: #ec4899;
+            --era-20s: #06b6d4;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            overflow: hidden; /* Prevent full page scroll, use inner scrolling */
+        }
+
+        /* 顶部导航 */
+        .navbar {
+            background: rgba(16, 16, 18, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            height: 60px;
+            z-index: 1000;
+        }
+        
+        .brand-logo {
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            background: linear-gradient(90deg, #fff, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* 主布局 */
+        .main-wrapper {
+            display: flex;
+            height: calc(100vh - 60px);
+        }
+
+        /* --- 左侧时间轴 --- */
+        .timeline-sidebar {
+            width: 400px;
+            flex-shrink: 0;
+            background: var(--sidebar-bg);
+            border-right: 1px solid var(--border-color);
+            overflow-y: auto;
+            padding: 20px 0;
+        }
+
+        .timeline-header {
+            padding: 0 24px 16px;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 20px;
+        }
+
+        .timeline-container {
+            position: relative;
+            padding-left: 40px; /* Space for the line */
+            padding-right: 20px;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 24px;
+            top: 10px;
+            bottom: 10px;
+            width: 2px;
+            background: #3f3f46;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 24px;
+            padding: 16px;
+            border-radius: 12px;
+            background: transparent;
+            border: 1px solid transparent;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .timeline-item:hover {
+            background: rgba(255,255,255,0.03);
+            transform: translateX(4px);
+        }
+
+        .timeline-item.active {
+            background: rgba(139, 92, 246, 0.1);
+            border-color: var(--accent-color);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+
+        /* Timeline Dot */
+        .timeline-dot {
+            position: absolute;
+            left: -22px; /* Adjust based on container padding */
+            top: 24px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--card-bg);
+            border: 2px solid #71717a;
+            z-index: 2;
+            transition: all 0.3s;
+        }
+
+        .timeline-item:hover .timeline-dot {
+            border-color: var(--accent-main);
+            transform: scale(1.2);
+        }
+
+        .timeline-item.active .timeline-dot {
+            background: var(--accent-color);
+            border-color: #fff;
+            box-shadow: 0 0 10px var(--accent-color);
+            transform: scale(1.3);
+        }
+
+        .decade-year {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #fff;
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+
+        .decade-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .decade-desc {
+            font-size: 0.85rem;
+            color: var(--text-sub);
+            line-height: 1.5;
+            display: -webkit-box;
+            -webkit-line-clamp: 2; /* Limit to 2 lines */
+            -webkit-box-orient: vertical; 
+            overflow: hidden;
+        }
+
+        /* Copy Button inside timeline */
+        .btn-copy-era {
+            margin-top: 10px;
+            font-size: 0.75rem;
+            padding: 4px 8px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid #3f3f46;
+            color: #fff;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            width: fit-content;
+            transition: all 0.2s;
+        }
+        .btn-copy-era:hover {
+            background: var(--accent-color);
+            border-color: var(--accent-color);
+        }
+
+        /* --- 右侧内容区 --- */
+        .content-area {
+            flex-grow: 1;
+            padding: 30px;
+            overflow-y: auto;
+            background: var(--bg-color);
+            position: relative;
+        }
+
+        .content-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .filter-badge {
+            font-size: 0.85rem;
+            padding: 6px 12px;
+            border-radius: 20px;
+            background: #27272a;
+            color: #a1a1aa;
+            border: 1px solid transparent;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .filter-badge.active {
+            background: var(--accent-color);
+            color: #fff;
+        }
+        .filter-badge:hover:not(.active) {
+            border-color: #52525b;
+            color: #fff;
+        }
+
+        /* Style Card */
+        .style-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 20px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+        }
+
+        .style-card:hover {
+            transform: translateY(-4px);
+            border-color: #52525b;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .card-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+        
+        .era-tag {
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 4px;
+            background: #27272a;
+            color: #71717a;
+            text-transform: uppercase;
+        }
+
+        .style-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+
+        .style-tags-container {
+            margin-bottom: 16px;
+        }
+
+        .tag-pill {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-family: 'JetBrains Mono', monospace;
+            padding: 4px 8px;
+            margin-right: 4px;
+            margin-bottom: 6px;
+            border-radius: 6px;
+            background: rgba(139, 92, 246, 0.1);
+            color: #d8b4fe;
+            cursor: pointer;
+            border: 1px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .tag-pill:hover {
+            background: rgba(139, 92, 246, 0.25);
+            border-color: rgba(139, 92, 246, 0.5);
+            color: #fff;
+        }
+
+        .play-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: #27272a;
+            border: none;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            flex-shrink: 0;
+        }
+        .play-btn:hover { background: #fff; color: #000; }
+        .play-btn.playing { background: var(--accent-color); animation: pulse 1.5s infinite; }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(139, 92, 246, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(139, 92, 246, 0); }
+        }
+
+        .btn-copy-card {
+            margin-top: auto;
+            width: 100%;
+            background: transparent;
+            border: 1px dashed #52525b;
+            color: #a1a1aa;
+            padding: 8px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+        .btn-copy-card:hover {
+            border-color: #fff;
+            color: #fff;
+            background: rgba(255,255,255,0.05);
+        }
+
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg-color); }
+        ::-webkit-scrollbar-thumb { background: #3f3f46; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #52525b; }
+
+        /* Mobile tweaks */
+        @media (max-width: 992px) {
+            .main-wrapper { flex-direction: column; height: auto; }
+            .timeline-sidebar { width: 100%; height: 300px; border-right: none; border-bottom: 1px solid var(--border-color); }
+            .content-area { height: auto; }
+            body { overflow: auto; }
+        }
+        
+        /* Toast */
+        .toast-container { position: fixed; bottom: 20px; right: 20px; z-index: 2000; }
+    </style>
+</head>
+<body>
+
+    <!-- Nav -->
+    <nav class="navbar px-4 d-flex justify-content-between">
+        <div class="d-flex align-items-center">
+            <i class="bi bi-vinyl-fill me-2 text-white" style="font-size: 1.2rem;"></i>
+            <span class="brand-logo fs-5">Suno Curator V4</span>
+        </div>
+        <div class="d-flex gap-2">
+            <button class="btn btn-sm btn-outline-light" onclick="resetFilter()">
+                <i class="bi bi-grid-fill me-1"></i> View All
+            </button>
+            <a href="https://suno.com" target="_blank" class="btn btn-sm btn-primary" style="background-color: var(--accent-color); border:none;">
+                Open Suno <i class="bi bi-box-arrow-up-right ms-1"></i>
+            </a>
+        </div>
+    </nav>
+
+    <div class="main-wrapper">
+        
+        <!-- SIDEBAR: Timeline -->
+        <div class="timeline-sidebar">
+            <div class="timeline-header">
+                <h6 class="text-white mb-1">Historical Eras</h6>
+                <small class="text-secondary">Select an era to filter styles</small>
+            </div>
+            
+            <div class="timeline-container" id="timeline-container">
+                <div class="timeline-line"></div>
+                <!-- Timeline items injected here -->
+            </div>
+        </div>
+
+        <!-- MAIN: Asset Grid -->
+        <div class="content-area">
+            <div class="content-header">
+                <div>
+                    <h4 class="text-white mb-1" id="grid-title">All Styles</h4>
+                    <small class="text-secondary" id="grid-subtitle">Showing curated selection across all decades</small>
+                </div>
+                <div class="d-flex gap-2">
+                    <input type="text" id="search-input" class="form-control form-control-sm bg-dark text-white border-secondary" placeholder="Search vibe..." style="width: 200px;">
+                </div>
+            </div>
+
+            <div class="row g-4" id="card-grid">
+                <!-- Cards injected here -->
+            </div>
+            
+            <div class="text-center mt-5 text-secondary small">
+                <p>Pro Tip: Combine "Era Prompts" (Left) with "Style Tags" (Right) for best results.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Hidden Player -->
+    <audio id="global-player"></audio>
+
+    <!-- Toast Notification -->
+    <div class="toast-container">
+        <div id="copyToast" class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    <i class="bi bi-check-circle-fill me-2"></i> <span id="toast-msg">Copied!</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // ============================================
+        // 1. DATA: Timeline (Decades)
+        // ============================================
+        const timelineData = [
+            {
+                id: "1950s",
+                year: "1950s",
+                title: "Rockabilly & Doo-Wop",
+                desc: "Blues 遇见 Country，摇滚乐的诞生。人声占据绝对统治地位，乐器是为了伴奏而存在。",
+                prompt: "1950s style, mono recording, slapback delay on vocals, doo-wop harmony, walking bass, acoustic drums, raw energy"
+            },
+            {
+                id: "1960s",
+                year: "1960s",
+                title: "Psychedelia & Motown",
+                desc: "从英伦入侵到迷幻摇滚。立体声实验开始，低音吉他(Bass)变得清晰而富有旋律性。",
+                prompt: "1960s style, british invasion, psychedelic rock, motown soul, tambourine, rich vocal harmonies, vintage tube saturation"
+            },
+            {
+                id: "1970s",
+                year: "1970s",
+                title: "Funk, Disco & Punk",
+                desc: "律动的黄金时代。贝斯是灵魂，BPM 稳定在 110-120 之间，弦乐与电吉他共舞。",
+                prompt: "1970s style, funk groove, disco strings, wah-wah guitar, punchy bassline, analog warmth, studio 54 vibe"
+            },
+            {
+                id: "1980s",
+                year: "1980s",
+                title: "Synthpop & Hair Metal",
+                desc: "数字时代的黎明。门限混响(Gated Reverb)的军鼓，DX7 合成器的冰冷音色。",
+                prompt: "1980s style, synthwave, gated reverb snare, yamaha dx7, drum machine, neon atmosphere, guitar solo, chorus effect"
+            },
+            {
+                id: "1990s",
+                year: "1990s",
+                title: "Hip-Hop & Grunge",
+                desc: "采样的艺术与失真的怒火。Boom Bap 的鼓点更脏更沉，Grunge 吉他更躁。",
+                prompt: "1990s style, boom bap beats, sampled loops, grunge distortion, lo-fi aesthetic, heavy sub-bass, angst vocals"
+            },
+            {
+                id: "2000s",
+                year: "2000s",
+                title: "Pop-Punk & R&B",
+                desc: "Pro Tools 带来的完美音准。人声变得极其靠前且明亮，压缩感强，Autotune 初现。",
+                prompt: "2000s style, pop punk energy, millennium r&b, polished production, heavy compression, acoustic guitar intro, radio hit"
+            },
+            {
+                id: "2010s",
+                year: "2010s",
+                title: "EDM & Trap",
+                desc: "Sidechain (侧链压缩) 的呼吸感。808 鼓机统治低频，Hi-hat 变成旋律乐器。",
+                prompt: "2010s style, edm drop, trap hi-hat rolls, massive 808 bass, sidechain compression, pitch-shifted vocals, tropical house"
+            },
+            {
+                id: "2020s",
+                year: "2020s",
+                title: "Hyperpop & Viral",
+                desc: "为了手机扬声器而混音。流派边界消失，极度失真与极度Lo-fi并存。",
+                prompt: "2020s style, hyperpop, glitchcore, distorted bass, tiktok viral hook, genre-blending, sped up, nightcore influence"
+            }
+        ];
+
+        // ============================================
+        // 2. DATA: Expanded Asset Library (Killer Combos)
+        // ============================================
+        // Note: Audio URLs are placeholders. Replace with your Suno generations.
+        const assetData = [
+            // 1950s
+            { decade: "1950s", name: "Doo-Wop Romance", tags: "doo-wop, 50s ballad, finger snaps, male quartet, romantic, slow dance", audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" },
+            { decade: "1950s", name: "Rockabilly Jive", tags: "rockabilly, upbeat, double bass slap, twangy guitar, elvis style, 12-bar blues", audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" },
+            
+            // 1960s
+            { decade: "1960s", name: "Psychedelic Rock", tags: "psychedelic rock, 60s, sitar, fuzz guitar, dreamy vocals, kaleidoscope", audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3" },
+            { decade: "1960s", name: "Motown Soul", tags: "motown, northern soul, brass section, groovy bass, tambourine, female lead", audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3" },
+            { decade: "1960s", name: "British Invasion", tags: "beat music, liverpool sound, jangly guitar, catchy chorus, harmonica", audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3" },
+
+            // 1970s
+            { decade: "1970s", name: "Classic Disco", tags: "disco, four-on-the-floor, string hits, funky bass octave, falsetto, party", audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3" },
+            { decade: "1970s", name: "Hard Rock Anthem", tags: "hard rock, 70s, distorted riffs, powerful drums, high vocals, arena rock", audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3" },
+            { decade: "1970s", name: "Yacht Rock", tags: "yacht rock, smooth, rhodes piano, saxophone solo, breezy, laid back", audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3" },
+
+            // 1980s
+            { decade: "1980s", name: "Synthwave / Outrun", tags: "synthwave, retrowave, arpeggiated bass, analog synth, driving beat, night drive", audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3" },
+            { decade: "1980s", name: "Japanese City Pop", tags: "city pop, j-pop 80s, funky bass, plastic love vibe, female vocal, urban", audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-10.mp3" },
+            { decade: "1980s", name: "Post-Punk / Goth", tags: "post-punk, goth rock, flanger bass, deep vocals, dark atmosphere, drum machine", audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-11.mp3" },
+
+            // 1990s
+            { decade: "1990s", name: "Boom Bap Hip-Hop", tags: "90s hip hop, boom bap, jazz samples, scratching, mpc60 drums, street vibe", audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-12.mp3" },
+            { decade: "1990s", name: "Seattle Grunge", tags: "grunge, 90s alternative, distorted chords, loud-quiet-loud dynamics, angst", audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-13.mp3" },
+            { decade: "1990s", name: "Eurodance", tags: "eurodance, 90s dance, female hook, male rap verse, high bpm, synth stab", audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-14.mp3" },
+
+            // 2000s
+            { decade: "2000s", name: "Pop Punk", tags: "pop punk, 2000s, power chords, fast tempo, teenage rebellion, nasal vocals", audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-15.mp3" },
+            { decade: "2000s", name: "Nu Metal", tags: "nu metal, drop tuning guitar, rapping, turntable scratch, aggressive, angst", audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-16.mp3" },
+
+            // 2010s
+            { decade: "2010s", name: "Festival EDM", tags: "big room house, edm festival, build up, heavy drop, supersaw synths, jump", audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" },
+            { decade: "2010s", name: "Lofi Hip Hop", tags: "lofi hip hop, study beats, vinyl crackle, chill, downtempo, nostalgic", audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" },
+
+            // 2020s
+            { decade: "2020s", name: "Cyberpunk Phonk", tags: "drift phonk, cowbell, distorted 808, memphis rap samples, high energy", audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3" },
+            { decade: "2020s", name: "Hyperpop", tags: "hyperpop, autotune, metallic snare, glitch, bubblegum bass, chaotic", audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3" }
+        ];
+
+        // ============================================
+        // 3. LOGIC & RENDER
+        // ============================================
+        
+        const timelineContainer = document.getElementById('timeline-container');
+        const gridContainer = document.getElementById('card-grid');
+        const gridTitle = document.getElementById('grid-title');
+        const gridSubtitle = document.getElementById('grid-subtitle');
+        const searchInput = document.getElementById('search-input');
+        let currentFilterDecade = null;
+
+        // --- Render Timeline ---
+        function renderTimeline() {
+            timelineContainer.innerHTML = '<div class="timeline-line"></div>'; // Reset
+            
+            timelineData.forEach(item => {
+                const el = document.createElement('div');
+                el.className = 'timeline-item';
+                el.setAttribute('data-id', item.id);
+                // Click timeline item -> Filter Grid
+                el.onclick = (e) => {
+                    // Prevent triggering if clicking copy button
+                    if(e.target.closest('.btn-copy-era')) return;
+                    handleEraClick(item.id);
+                };
+
+                el.innerHTML = `
+                    <div class="timeline-dot"></div>
+                    <div class="decade-year">${item.year}</div>
+                    <div class="decade-title">${item.title}</div>
+                    <div class="decade-desc">${item.desc}</div>
+                    <button class="btn-copy-era" onclick="copyText('${item.prompt}', 'Era Prompt Copied!')">
+                        <i class="bi bi-magic"></i> Copy Vibe
+                    </button>
+                `;
+                timelineContainer.appendChild(el);
+            });
+        }
+
+        // --- Handle Filtering ---
+        function handleEraClick(decadeId) {
+            // Update Active State in Timeline
+            document.querySelectorAll('.timeline-item').forEach(el => el.classList.remove('active'));
+            const activeItem = document.querySelector(`.timeline-item[data-id="${decadeId}"]`);
+            if(activeItem) activeItem.classList.add('active');
+
+            // Filter Logic
+            currentFilterDecade = decadeId;
+            const eraInfo = timelineData.find(d => d.id === decadeId);
+            
+            gridTitle.textContent = `${eraInfo.year} Collection`;
+            gridSubtitle.textContent = `Curated styles for the ${eraInfo.title} era`;
+            
+            renderGrid(decadeId);
+        }
+
+        function resetFilter() {
+            currentFilterDecade = null;
+            document.querySelectorAll('.timeline-item').forEach(el => el.classList.remove('active'));
+            gridTitle.textContent = "All Styles";
+            gridSubtitle.textContent = "Showing curated selection across all decades";
+            renderGrid();
+        }
+
+        // --- Render Grid ---
+        function renderGrid(filterDecade = null, searchTerm = "") {
+            let filtered = assetData;
+
+            // 1. Filter by Decade
+            if (filterDecade) {
+                filtered = filtered.filter(item => item.decade === filterDecade);
+            }
+
+            // 2. Filter by Search
+            if (searchTerm) {
+                const term = searchTerm.toLowerCase();
+                filtered = filtered.filter(item => 
+                    item.name.toLowerCase().includes(term) || 
+                    item.tags.toLowerCase().includes(term)
+                );
+            }
+
+            gridContainer.innerHTML = filtered.map((item, index) => {
+                // Generate Tag Pills
+                const pills = item.tags.split(',').map(t => 
+                    `<span class="tag-pill" onclick="copyText('${t.trim()}', 'Tag Copied!')">${t.trim()}</span>`
+                ).join('');
+
+                return `
+                <div class="col-xl-4 col-lg-6 col-md-12">
+                    <div class="style-card">
+                        <div class="card-meta">
+                            <span class="era-tag">${item.decade}</span>
+                            <button class="play-btn" id="btn-${index}" onclick="toggleAudio('${item.audio}', 'btn-${index}')">
+                                <i class="bi bi-play-fill" style="font-size:1.2rem;"></i>
+                            </button>
+                        </div>
+                        
+                        <h5 class="style-name">${item.name}</h5>
+                        <div class="style-tags-container">
+                            ${pills}
+                        </div>
+                        
+                        <button class="btn-copy-card" onclick="copyText('${item.tags}', 'Full Combo Copied!')">
+                            <i class="bi bi-clipboard me-2"></i>Copy Full Prompt
+                        </button>
+                    </div>
+                </div>
+                `;
+            }).join('');
+
+            if (filtered.length === 0) {
+                gridContainer.innerHTML = `<div class="text-center text-secondary py-5 w-100">No styles found. Try a different search.</div>`;
+            }
+        }
+
+        // --- Audio Logic ---
+        const player = document.getElementById('global-player');
+        let currentBtn = null;
+
+        function toggleAudio(url, btnId) {
+            const btn = document.getElementById(btnId);
+            const icon = btn.querySelector('i');
+
+            if (currentBtn === btn && !player.paused) {
+                player.pause();
+                resetBtn(btn);
+                return;
+            }
+
+            if (currentBtn) resetBtn(currentBtn);
+
+            player.src = url;
+            player.play();
+            currentBtn = btn;
+            
+            btn.classList.add('playing');
+            icon.classList.remove('bi-play-fill');
+            icon.classList.add('bi-pause-fill');
+        }
+
+        function resetBtn(btn) {
+            if(!btn) return;
+            btn.classList.remove('playing');
+            const icon = btn.querySelector('i');
+            icon.classList.remove('bi-pause-fill');
+            icon.classList.add('bi-play-fill');
+        }
+        
+        player.addEventListener('ended', () => resetBtn(currentBtn));
+
+        // --- Copy Logic ---
+        function copyText(text, msg) {
+            navigator.clipboard.writeText(text).then(() => {
+                document.getElementById('toast-msg').innerText = msg;
+                const toastEl = document.getElementById('copyToast');
+                const toast = new bootstrap.Toast(toastEl);
+                toast.show();
+            });
+        }
+
+        // --- Init ---
+        renderTimeline();
+        renderGrid();
+
+        // Search Listener
+        searchInput.addEventListener('input', (e) => {
+            renderGrid(currentFilterDecade, e.target.value);
+        });
+
+    </script>
+</body>
+</html>
