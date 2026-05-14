@@ -10,7 +10,7 @@
 cd backend
 
 # 创建虚拟环境
-python -m venv venv
+python3.12 -m venv venv
 source venv/bin/activate  # Windows: venv\Scripts\activate
 
 # 安装依赖
