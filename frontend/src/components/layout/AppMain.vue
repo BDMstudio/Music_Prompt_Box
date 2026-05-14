@@ -17,7 +17,7 @@ const title = computed(() => {
 })
 
 const subtitle = computed(() => {
-  return `共 ${stylesStore.total} 个风格`
+  return `> 共 ${stylesStore.total} 个风格`
 })
 
 function handleSearch(query: string) {
@@ -31,21 +31,30 @@ watch(() => stylesStore.page, () => {
 </script>
 
 <template>
-  <main class="flex-1 overflow-y-auto p-6">
-    <div class="mb-6">
-      <div class="flex items-center justify-between mb-4">
-        <div>
-          <h1 class="text-2xl font-bold text-white">{{ title }}</h1>
-          <p class="text-sm text-text-sub">{{ subtitle }}</p>
-        </div>
-      </div>
-      
-      <div class="flex items-center gap-4 flex-wrap">
-        <SearchBox @search="handleSearch" />
-        <HotTags />
-      </div>
+  <main class="flex-1 overflow-y-auto overflow-x-hidden p-4 md:p-6 relative min-w-0">
+    <!-- Perspective grid background — isolated in overflow-hidden container -->
+    <div class="absolute inset-0 overflow-hidden pointer-events-none">
+      <div class="absolute bottom-0 left-0 right-0 h-[300px] perspective-grid opacity-20"></div>
     </div>
 
-    <StyleGrid />
+    <div class="relative z-10">
+      <!-- Title area -->
+      <div class="mb-6">
+        <div class="flex items-end justify-between mb-4">
+          <div>
+            <h1 class="font-heading font-black text-3xl sm:text-4xl lg:text-5xl uppercase tracking-wider gradient-text leading-tight">{{ title }}</h1>
+            <p class="text-sm text-neon-magenta/60 font-mono mt-2 tracking-wider">{{ subtitle }}</p>
+          </div>
+        </div>
+        
+        <!-- Search + tags row -->
+        <div class="flex items-center gap-4 flex-wrap">
+          <SearchBox @search="handleSearch" />
+          <HotTags />
+        </div>
+      </div>
+
+      <StyleGrid />
+    </div>
   </main>
 </template>

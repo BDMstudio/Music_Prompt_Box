@@ -14,19 +14,31 @@ watch(() => genresStore.selectedGenreId, (newId) => {
 </script>
 
 <template>
-  <aside class="w-[320px] flex-shrink-0 bg-sidebar-bg border-r border-border overflow-y-auto">
-    <div class="p-4 border-b border-border">
-      <h2 class="text-white font-semibold mb-1">流派时间线</h2>
-      <p class="text-xs text-text-sub">选择流派筛选风格卡片</p>
+  <aside class="w-[320px] flex-shrink-0 bg-sidebar-bg border-r-2 border-border-dim overflow-y-auto">
+    <!-- Terminal-style header -->
+    <div class="border-b border-neon-cyan/30">
+      <div class="flex items-center gap-2 px-4 py-2 bg-neon-cyan/5 border-b border-neon-cyan/20">
+        <div class="h-2.5 w-2.5 rounded-full bg-neon-magenta"></div>
+        <div class="h-2.5 w-2.5 rounded-full bg-neon-cyan"></div>
+        <div class="h-2.5 w-2.5 rounded-full bg-neon-orange"></div>
+        <span class="ml-2 text-xs text-neon-cyan/60 font-mono">genre_tree.exe</span>
+      </div>
+      <div class="p-4">
+        <h2 class="font-heading font-bold text-lg uppercase tracking-wider text-neon-cyan glow-text-cyan">流派时间线</h2>
+        <p class="text-xs text-text-sub mt-1 font-mono">> 选择流派筛选风格卡片</p>
+      </div>
     </div>
     
+    <!-- View All button -->
     <div class="p-4">
       <button
         @click="genresStore.selectGenre(null)"
-        class="w-full text-left px-3 py-2 rounded-lg text-sm mb-4 transition"
-        :class="genresStore.selectedGenreId === null ? 'bg-accent/20 text-accent' : 'text-text-sub hover:bg-zinc-800'"
+        class="w-full text-left px-3 py-2 border-2 font-mono text-sm uppercase tracking-wider transition-all duration-200"
+        :class="genresStore.selectedGenreId === null
+          ? 'border-neon-magenta bg-neon-magenta/20 text-neon-magenta shadow-neon-magenta'
+          : 'border-border-dim text-text-sub hover:border-neon-cyan hover:text-neon-cyan'"
       >
-        查看全部
+        > 查看全部
       </button>
       
       <GenreTree :genres="genresStore.genres" />

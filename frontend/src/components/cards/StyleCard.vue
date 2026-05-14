@@ -53,18 +53,21 @@ async function addToFolder(folderId: string) {
 </script>
 
 <template>
-  <div class="bg-card-bg border border-border rounded-2xl p-5 hover:border-zinc-600 hover:shadow-xl hover:-translate-y-1 transition-all group">
+  <div class="border border-neon-magenta/30 border-t-2 border-t-neon-cyan bg-panel backdrop-blur-md p-5
+              hover:-translate-y-2 hover:shadow-neon-cyan transition-all duration-200 group">
+    <!-- Top row: genre badge + actions -->
     <div class="flex items-start justify-between mb-3">
-      <span class="text-xs font-bold px-2 py-0.5 bg-zinc-800 text-zinc-500 rounded uppercase">
+      <span class="text-xs font-mono px-2 py-0.5 bg-neon-magenta/10 text-neon-magenta border border-neon-magenta/30 uppercase tracking-wider">
         {{ style.genre_name || 'Unknown' }}
       </span>
       
       <div class="flex items-center gap-1">
+        <!-- Folder button -->
         <div class="relative">
           <button
             @click="showFolderMenu = !showFolderMenu"
-            class="p-1.5 rounded-lg opacity-0 group-hover:opacity-100 hover:bg-zinc-700 transition"
-            :class="style.is_favorited ? 'text-yellow-500 opacity-100' : 'text-zinc-500'"
+            class="p-1.5 opacity-0 group-hover:opacity-100 hover:bg-neon-magenta/20 transition"
+            :class="style.is_favorited ? 'text-neon-orange opacity-100' : 'text-text-sub'"
             title="添加到收藏夹"
           >
             <svg class="w-4 h-4" :fill="style.is_favorited ? 'currentColor' : 'none'" stroke="currentColor" viewBox="0 0 24 24">
@@ -74,25 +77,26 @@ async function addToFolder(folderId: string) {
 
           <div
             v-if="showFolderMenu"
-            class="absolute right-0 top-full mt-1 w-40 bg-zinc-900 border border-zinc-700 rounded-lg shadow-xl z-10 py-1"
+            class="absolute right-0 top-full mt-1 w-44 bg-panel-solid border-2 border-neon-cyan shadow-neon-cyan z-10 py-1"
           >
             <div
               v-for="folder in foldersStore.folders"
               :key="folder.id"
               @click="addToFolder(folder.id)"
-              class="px-3 py-2 text-sm hover:bg-zinc-800 cursor-pointer"
+              class="px-3 py-2 text-sm font-mono text-chrome hover:bg-neon-cyan/10 cursor-pointer"
             >
               {{ folder.name }}
             </div>
-            <div v-if="foldersStore.folders.length === 0" class="px-3 py-2 text-sm text-zinc-500">
+            <div v-if="foldersStore.folders.length === 0" class="px-3 py-2 text-sm text-text-sub font-mono">
               暂无收藏夹
             </div>
           </div>
         </div>
 
+        <!-- Edit button -->
         <button
           @click="showEditModal = true"
-          class="p-1.5 rounded-lg text-zinc-500 opacity-0 group-hover:opacity-100 hover:bg-zinc-700 hover:text-white transition"
+          class="p-1.5 text-text-sub opacity-0 group-hover:opacity-100 hover:bg-neon-cyan/20 hover:text-neon-cyan transition"
           title="编辑"
         >
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -100,9 +104,10 @@ async function addToFolder(folderId: string) {
           </svg>
         </button>
 
+        <!-- Delete button -->
         <button
           @click="showDeleteConfirm = true"
-          class="p-1.5 rounded-lg text-zinc-500 opacity-0 group-hover:opacity-100 hover:bg-red-900/50 hover:text-red-400 transition"
+          class="p-1.5 text-text-sub opacity-0 group-hover:opacity-100 hover:bg-neon-magenta/30 hover:text-neon-magenta transition"
           title="删除"
         >
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -112,14 +117,15 @@ async function addToFolder(folderId: string) {
       </div>
     </div>
 
+    <!-- Title + audio play -->
     <div class="flex items-center gap-3 mb-3">
-      <h3 class="text-lg font-bold text-white flex-1">{{ style.name }}</h3>
+      <h3 class="font-heading font-semibold text-2xl text-neon-cyan glow-text-cyan flex-1">{{ style.name }}</h3>
       
       <button
         v-if="hasAudio"
         @click="togglePlay"
-        class="w-9 h-9 rounded-full flex items-center justify-center transition flex-shrink-0"
-        :class="isPlaying ? 'bg-accent animate-pulse-glow' : 'bg-zinc-700 hover:bg-white hover:text-black'"
+        class="w-9 h-9 rounded-full flex items-center justify-center transition-all duration-200 flex-shrink-0 border-2"
+        :class="isPlaying ? 'bg-neon-magenta border-neon-magenta text-white animate-pulse-glow' : 'bg-transparent border-neon-cyan text-neon-cyan hover:bg-neon-cyan hover:text-void'"
       >
         <svg v-if="isPlaying" class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
           <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/>
@@ -130,21 +136,27 @@ async function addToFolder(folderId: string) {
       </button>
     </div>
 
+    <!-- Tags -->
     <div class="flex flex-wrap gap-1.5 mb-4">
       <TagPill v-for="tag in style.tags" :key="tag" :tag="tag" />
     </div>
 
-    <p v-if="style.description" class="text-sm text-text-sub mb-4 line-clamp-2">
+    <!-- Description -->
+    <p v-if="style.description" class="text-sm text-chrome/70 mb-4 line-clamp-2 font-mono">
       {{ style.description }}
     </p>
 
-    <div v-if="style.bpm_range" class="text-xs text-zinc-600 mb-4">
-      BPM: {{ style.bpm_range }}
+    <!-- BPM -->
+    <div v-if="style.bpm_range" class="text-xs text-neon-orange/70 mb-4 font-mono uppercase tracking-wider">
+      > BPM: {{ style.bpm_range }}
     </div>
 
+    <!-- Copy all tags button -->
     <button
       @click="copyAllTags"
-      class="w-full py-2 border border-dashed border-zinc-600 rounded-lg text-sm text-zinc-400 hover:border-white hover:text-white hover:bg-zinc-800/50 transition flex items-center justify-center gap-2"
+      class="w-full py-2 border-2 border-neon-magenta/50 text-sm font-mono uppercase tracking-wider text-neon-magenta
+             hover:bg-neon-magenta hover:text-white hover:shadow-neon-magenta hover:border-neon-magenta
+             transition-all duration-200 flex items-center justify-center gap-2"
     >
       <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
