@@ -25,7 +25,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="h-screen flex flex-col bg-app-bg">
+  <div class="h-screen flex flex-col bg-background dark:bg-dark-bg text-foreground dark:text-dark-text-main transition-colors duration-300">
     <AppHeader />
     <div class="flex flex-1 overflow-hidden">
       <AppSidebar />

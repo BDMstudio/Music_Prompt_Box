@@ -2,42 +2,76 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Light mode (default) */
 body {
-  background-color: #09090b;
-  color: #e4e4e7;
-  font-family: 'Inter', system-ui, sans-serif;
+  background-color: #F0F0F0;
+  color: #121212;
+  font-family: 'Outfit', system-ui, sans-serif;
   overflow: hidden;
 }
 
+/* Dark mode */
+.dark body {
+  background-color: #0F0F0F;
+  color: #F0F0F0;
+}
+
+/* Bauhaus scrollbar — light */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #09090b;
+  background: #E0E0E0;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #3f3f46;
-  border-radius: 3px;
+  background: #121212;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #52525b;
+  background: #D02020;
 }
 
-@keyframes pulse-glow {
-  0% {
-    box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.7);
-  }
-  70% {
-    box-shadow: 0 0 0 10px rgba(139, 92, 246, 0);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba(139, 92, 246, 0);
-  }
+/* Bauhaus scrollbar — dark */
+.dark ::-webkit-scrollbar-track {
+  background: #1A1A1A;
 }
 
+.dark ::-webkit-scrollbar-thumb {
+  background: #E0E0E0;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #D02020;
+}
+
+/* Audio playing pulse — red glow */
 .animate-pulse-glow {
   animation: pulse-glow 1.5s infinite;
+}
+
+/* Dot grid pattern — light */
+.bg-dot-grid {
+  background-image: radial-gradient(#121212 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* Dot grid pattern — dark */
+.dark .bg-dot-grid {
+  background-image: radial-gradient(#555555 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* Geometric shape helpers */
+.geo-circle {
+  border-radius: 9999px;
+}
+
+.geo-square {
+  border-radius: 0;
+}
+
+.geo-triangle {
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
 }

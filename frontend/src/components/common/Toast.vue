@@ -16,12 +16,10 @@ const { showToast, toastMessage } = useClipboard()
     >
       <div
         v-if="showToast"
-        class="fixed bottom-5 right-5 px-4 py-2 bg-green-600 text-white rounded-lg shadow-lg flex items-center gap-2 z-50"
+        class="fixed bottom-5 right-5 px-4 py-2 bg-primary-blue text-white border-2 border-foreground dark:border-dark-border shadow-hard-sm dark:shadow-dark-hard-sm flex items-center gap-2 z-50 transition-colors duration-300"
       >
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-        </svg>
-        {{ toastMessage }}
+        <div class="w-4 h-4 geo-circle bg-primary-yellow flex-shrink-0"></div>
+        <span class="font-bold uppercase tracking-wider text-sm">{{ toastMessage }}</span>
       </div>
     </Transition>
   </Teleport>

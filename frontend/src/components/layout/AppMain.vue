@@ -31,15 +31,22 @@ watch(() => stylesStore.page, () => {
 </script>
 
 <template>
-  <main class="flex-1 overflow-y-auto p-6">
+  <main class="flex-1 overflow-y-auto p-6 bg-dot-grid">
+    <!-- Title area -->
     <div class="mb-6">
-      <div class="flex items-center justify-between mb-4">
+      <div class="flex items-end justify-between mb-4">
         <div>
-          <h1 class="text-2xl font-bold text-white">{{ title }}</h1>
-          <p class="text-sm text-text-sub">{{ subtitle }}</p>
+          <h1 class="text-4xl sm:text-5xl font-black uppercase tracking-tighter leading-[0.9] text-foreground dark:text-dark-text-main">{{ title }}</h1>
+          <p class="text-sm font-bold uppercase tracking-widest text-text-sub dark:text-dark-text-sub mt-2">{{ subtitle }}</p>
+        </div>
+        <!-- Geometric decoration -->
+        <div class="hidden sm:flex items-center gap-2">
+          <div class="w-6 h-6 geo-square bg-primary-yellow border-2 border-foreground dark:border-dark-border rotate-45"></div>
+          <div class="w-6 h-6 geo-circle bg-primary-red"></div>
         </div>
       </div>
       
+      <!-- Search + tags row -->
       <div class="flex items-center gap-4 flex-wrap">
         <SearchBox @search="handleSearch" />
         <HotTags />

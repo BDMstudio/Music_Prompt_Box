@@ -18,7 +18,8 @@ async function copyTag() {
 <template>
   <button
     @click="copyTag"
-    class="px-2 py-1 text-xs font-mono bg-accent/10 text-purple-300 rounded border border-transparent hover:border-accent/50 hover:bg-accent/20 hover:text-white transition"
+    class="px-2 py-1 text-xs font-bold uppercase tracking-wider bg-primary-yellow/20 dark:bg-primary-yellow/30 text-foreground dark:text-dark-text-main border-2 border-transparent
+           hover:border-foreground dark:hover:border-dark-border hover:bg-primary-yellow transition-all duration-200"
   >
     {{ tag }}
   </button>
