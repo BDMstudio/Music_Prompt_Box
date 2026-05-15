@@ -45,6 +45,8 @@ async def seed_database():
                 bpm_range=style_data.get("bpm_range"),
                 audio_type=style_data.get("audio_type"),
                 audio_source=style_data.get("audio_source"),
+                audio_platform=style_data.get("audio_platform"),
+                audio_metadata=json.dumps(style_data["audio_metadata"], ensure_ascii=False) if style_data.get("audio_metadata") else None,
                 reference_url=style_data.get("reference_url"),
                 copy_count=style_data.get("copy_count", 0),
             )

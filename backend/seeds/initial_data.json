@@ -1,6 +1,6 @@
 {
-  "version": "1.0",
-  "exported_at": "2026-01-19T00:00:00Z",
+  "version": "1.1",
+  "exported_at": "2026-05-15T00:00:00Z",
   "data": {
     "genres": [
       {
@@ -18,7 +18,71 @@
         "parent_id": "genre_1950s",
         "level": 2,
         "sort_order": 1,
-        "description": "人声和声主导的浪漫风格"
+        "description": "人声和声主导的浪漫风格",
+        "era_prompt": null
+      },
+      {
+        "id": "genre_1960s_psychedelic",
+        "name": "Psychedelic Rock",
+        "parent_id": "genre_1960s",
+        "level": 2,
+        "sort_order": 1,
+        "description": "迷幻摇滚，实验性声音",
+        "era_prompt": null
+      },
+      {
+        "id": "genre_1970s_disco",
+        "name": "Disco",
+        "parent_id": "genre_1970s",
+        "level": 2,
+        "sort_order": 1,
+        "description": "迪斯科舞曲",
+        "era_prompt": null
+      },
+      {
+        "id": "genre_1980s_synthwave",
+        "name": "Synthwave / Retrowave",
+        "parent_id": "genre_1980s",
+        "level": 2,
+        "sort_order": 1,
+        "description": "合成器浪潮",
+        "era_prompt": null
+      },
+      {
+        "id": "genre_1990s_boombap",
+        "name": "Boom Bap Hip-Hop",
+        "parent_id": "genre_1990s",
+        "level": 2,
+        "sort_order": 1,
+        "description": "90年代嘻哈",
+        "era_prompt": null
+      },
+      {
+        "id": "genre_2000s_poppunk",
+        "name": "Pop Punk",
+        "parent_id": "genre_2000s",
+        "level": 2,
+        "sort_order": 1,
+        "description": "流行朋克",
+        "era_prompt": null
+      },
+      {
+        "id": "genre_2010s_edm",
+        "name": "Big Room EDM",
+        "parent_id": "genre_2010s",
+        "level": 2,
+        "sort_order": 1,
+        "description": "大房间电子舞曲",
+        "era_prompt": null
+      },
+      {
+        "id": "genre_2020s_hyperpop",
+        "name": "Hyperpop",
+        "parent_id": "genre_2020s",
+        "level": 2,
+        "sort_order": 1,
+        "description": "超流行",
+        "era_prompt": null
       },
       {
         "id": "genre_1950s_rockabilly",
@@ -26,7 +90,8 @@
         "parent_id": "genre_1950s",
         "level": 2,
         "sort_order": 2,
-        "description": "Blues 遇见 Country，摇滚乐的诞生"
+        "description": "Blues 遇见 Country，摇滚乐的诞生",
+        "era_prompt": null
       },
       {
         "id": "genre_1960s",
@@ -38,20 +103,67 @@
         "era_prompt": "1960s style, british invasion, psychedelic rock, motown soul, tambourine, rich vocal harmonies, vintage tube saturation"
       },
       {
-        "id": "genre_1960s_psychedelic",
-        "name": "Psychedelic Rock",
-        "parent_id": "genre_1960s",
-        "level": 2,
-        "sort_order": 1,
-        "description": "迷幻摇滚，实验性声音"
-      },
-      {
         "id": "genre_1960s_motown",
         "name": "Motown Soul",
         "parent_id": "genre_1960s",
         "level": 2,
         "sort_order": 2,
-        "description": "底特律灵魂乐"
+        "description": "底特律灵魂乐",
+        "era_prompt": null
+      },
+      {
+        "id": "genre_1970s_funk",
+        "name": "Funk",
+        "parent_id": "genre_1970s",
+        "level": 2,
+        "sort_order": 2,
+        "description": "放克音乐",
+        "era_prompt": null
+      },
+      {
+        "id": "genre_1980s_newwave",
+        "name": "New Wave",
+        "parent_id": "genre_1980s",
+        "level": 2,
+        "sort_order": 2,
+        "description": "新浪潮",
+        "era_prompt": null
+      },
+      {
+        "id": "genre_1990s_grunge",
+        "name": "Grunge / Alternative",
+        "parent_id": "genre_1990s",
+        "level": 2,
+        "sort_order": 2,
+        "description": "垃圾摇滚/另类摇滚",
+        "era_prompt": null
+      },
+      {
+        "id": "genre_2000s_numetal",
+        "name": "Nu Metal",
+        "parent_id": "genre_2000s",
+        "level": 2,
+        "sort_order": 2,
+        "description": "新金属",
+        "era_prompt": null
+      },
+      {
+        "id": "genre_2010s_trap",
+        "name": "Trap",
+        "parent_id": "genre_2010s",
+        "level": 2,
+        "sort_order": 2,
+        "description": "陷阱音乐",
+        "era_prompt": null
+      },
+      {
+        "id": "genre_2020s_phonk",
+        "name": "Drift Phonk",
+        "parent_id": "genre_2020s",
+        "level": 2,
+        "sort_order": 2,
+        "description": "漂移放克",
+        "era_prompt": null
       },
       {
         "id": "genre_1960s_british",
@@ -59,7 +171,8 @@
         "parent_id": "genre_1960s",
         "level": 2,
         "sort_order": 3,
-        "description": "英伦入侵"
+        "description": "英伦入侵",
+        "era_prompt": null
       },
       {
         "id": "genre_1970s",
@@ -71,28 +184,49 @@
         "era_prompt": "1970s style, funk groove, disco strings, wah-wah guitar, punchy bassline, analog warmth, studio 54 vibe"
       },
       {
-        "id": "genre_1970s_disco",
-        "name": "Disco",
-        "parent_id": "genre_1970s",
-        "level": 2,
-        "sort_order": 1,
-        "description": "迪斯科舞曲"
-      },
-      {
-        "id": "genre_1970s_funk",
-        "name": "Funk",
-        "parent_id": "genre_1970s",
-        "level": 2,
-        "sort_order": 2,
-        "description": "放克音乐"
-      },
-      {
         "id": "genre_1970s_hardrock",
         "name": "Hard Rock",
         "parent_id": "genre_1970s",
         "level": 2,
         "sort_order": 3,
-        "description": "硬摇滚"
+        "description": "硬摇滚",
+        "era_prompt": null
+      },
+      {
+        "id": "genre_1980s_postpunk",
+        "name": "Post-Punk / Goth",
+        "parent_id": "genre_1980s",
+        "level": 2,
+        "sort_order": 3,
+        "description": "后朋克/哥特",
+        "era_prompt": null
+      },
+      {
+        "id": "genre_1990s_eurodance",
+        "name": "Eurodance",
+        "parent_id": "genre_1990s",
+        "level": 2,
+        "sort_order": 3,
+        "description": "欧陆舞曲",
+        "era_prompt": null
+      },
+      {
+        "id": "genre_2010s_lofi",
+        "name": "Lo-Fi Hip Hop",
+        "parent_id": "genre_2010s",
+        "level": 2,
+        "sort_order": 3,
+        "description": "低保真嘻哈",
+        "era_prompt": null
+      },
+      {
+        "id": "genre_2020s_bedroom",
+        "name": "Bedroom Pop",
+        "parent_id": "genre_2020s",
+        "level": 2,
+        "sort_order": 3,
+        "description": "卧室流行",
+        "era_prompt": null
       },
       {
         "id": "genre_1970s_punk",
@@ -100,15 +234,8 @@
         "parent_id": "genre_1970s",
         "level": 2,
         "sort_order": 4,
-        "description": "朋克摇滚"
-      },
-      {
-        "id": "genre_1970s_yacht",
-        "name": "Yacht Rock",
-        "parent_id": "genre_1970s",
-        "level": 2,
-        "sort_order": 5,
-        "description": "游艇摇滚，轻柔摇滚"
+        "description": "朋克摇滚",
+        "era_prompt": null
       },
       {
         "id": "genre_1980s",
@@ -120,36 +247,22 @@
         "era_prompt": "1980s style, synthwave, gated reverb snare, yamaha dx7, drum machine, neon atmosphere, guitar solo, chorus effect"
       },
       {
-        "id": "genre_1980s_synthwave",
-        "name": "Synthwave / Retrowave",
-        "parent_id": "genre_1980s",
-        "level": 2,
-        "sort_order": 1,
-        "description": "合成器浪潮"
-      },
-      {
-        "id": "genre_1980s_newwave",
-        "name": "New Wave",
-        "parent_id": "genre_1980s",
-        "level": 2,
-        "sort_order": 2,
-        "description": "新浪潮"
-      },
-      {
-        "id": "genre_1980s_postpunk",
-        "name": "Post-Punk / Goth",
-        "parent_id": "genre_1980s",
-        "level": 2,
-        "sort_order": 3,
-        "description": "后朋克/哥特"
-      },
-      {
         "id": "genre_1980s_citypop",
         "name": "City Pop",
         "parent_id": "genre_1980s",
         "level": 2,
         "sort_order": 4,
-        "description": "日本城市流行"
+        "description": "日本城市流行",
+        "era_prompt": null
+      },
+      {
+        "id": "genre_1970s_yacht",
+        "name": "Yacht Rock",
+        "parent_id": "genre_1970s",
+        "level": 2,
+        "sort_order": 5,
+        "description": "游艇摇滚，轻柔摇滚",
+        "era_prompt": null
       },
       {
         "id": "genre_1990s",
@@ -161,30 +274,6 @@
         "era_prompt": "1990s style, boom bap beats, sampled loops, grunge distortion, lo-fi aesthetic, heavy sub-bass, angst vocals"
       },
       {
-        "id": "genre_1990s_boombap",
-        "name": "Boom Bap Hip-Hop",
-        "parent_id": "genre_1990s",
-        "level": 2,
-        "sort_order": 1,
-        "description": "90年代嘻哈"
-      },
-      {
-        "id": "genre_1990s_grunge",
-        "name": "Grunge / Alternative",
-        "parent_id": "genre_1990s",
-        "level": 2,
-        "sort_order": 2,
-        "description": "垃圾摇滚/另类摇滚"
-      },
-      {
-        "id": "genre_1990s_eurodance",
-        "name": "Eurodance",
-        "parent_id": "genre_1990s",
-        "level": 2,
-        "sort_order": 3,
-        "description": "欧陆舞曲"
-      },
-      {
         "id": "genre_2000s",
         "name": "2000s",
         "parent_id": null,
@@ -192,22 +281,6 @@
         "sort_order": 6,
         "description": "Pop-Punk & R&B 时代",
         "era_prompt": "2000s style, pop punk energy, millennium r&b, polished production, heavy compression, acoustic guitar intro, radio hit"
-      },
-      {
-        "id": "genre_2000s_poppunk",
-        "name": "Pop Punk",
-        "parent_id": "genre_2000s",
-        "level": 2,
-        "sort_order": 1,
-        "description": "流行朋克"
-      },
-      {
-        "id": "genre_2000s_numetal",
-        "name": "Nu Metal",
-        "parent_id": "genre_2000s",
-        "level": 2,
-        "sort_order": 2,
-        "description": "新金属"
       },
       {
         "id": "genre_2010s",
@@ -219,30 +292,6 @@
         "era_prompt": "2010s style, edm drop, trap hi-hat rolls, massive 808 bass, sidechain compression, pitch-shifted vocals, tropical house"
       },
       {
-        "id": "genre_2010s_edm",
-        "name": "Big Room EDM",
-        "parent_id": "genre_2010s",
-        "level": 2,
-        "sort_order": 1,
-        "description": "大房间电子舞曲"
-      },
-      {
-        "id": "genre_2010s_trap",
-        "name": "Trap",
-        "parent_id": "genre_2010s",
-        "level": 2,
-        "sort_order": 2,
-        "description": "陷阱音乐"
-      },
-      {
-        "id": "genre_2010s_lofi",
-        "name": "Lo-Fi Hip Hop",
-        "parent_id": "genre_2010s",
-        "level": 2,
-        "sort_order": 3,
-        "description": "低保真嘻哈"
-      },
-      {
         "id": "genre_2020s",
         "name": "2020s",
         "parent_id": null,
@@ -250,192 +299,565 @@
         "sort_order": 8,
         "description": "Hyperpop & Viral 时代",
         "era_prompt": "2020s style, hyperpop, glitchcore, distorted bass, tiktok viral hook, genre-blending, sped up, nightcore influence"
-      },
-      {
-        "id": "genre_2020s_hyperpop",
-        "name": "Hyperpop",
-        "parent_id": "genre_2020s",
-        "level": 2,
-        "sort_order": 1,
-        "description": "超流行"
-      },
-      {
-        "id": "genre_2020s_phonk",
-        "name": "Drift Phonk",
-        "parent_id": "genre_2020s",
-        "level": 2,
-        "sort_order": 2,
-        "description": "漂移放克"
-      },
-      {
-        "id": "genre_2020s_bedroom",
-        "name": "Bedroom Pop",
-        "parent_id": "genre_2020s",
-        "level": 2,
-        "sort_order": 3,
-        "description": "卧室流行"
       }
     ],
     "styles": [
       {
         "id": "style_001",
         "name": "Doo-Wop Romance",
-        "tags": ["doo-wop", "50s ballad", "finger snaps", "male quartet", "romantic", "slow dance"],
+        "tags": [
+          "doo-wop",
+          "50s ballad",
+          "finger snaps",
+          "male quartet",
+          "romantic",
+          "slow dance"
+        ],
         "genre_id": "genre_1950s_doowop",
         "description": "经典的 50 年代浪漫情歌风格",
-        "bpm_range": "60-80"
+        "bpm_range": "60-80",
+        "audio_type": "url",
+        "audio_source": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/e3/d3/32/e3d33257-bfd5-8dea-acf0-44d594a58931/mzaf_1284478772471596263.plus.aac.p.m4a",
+        "audio_platform": "itunes",
+        "audio_metadata": {
+          "platform": "itunes",
+          "track_id": 845162414,
+          "track_name": "Earth Angel",
+          "artist_name": "The Penguins",
+          "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music4/v4/7c/a1/ef/7ca1ef9e-f171-c32b-307c-7fae27dae49a/cover.jpg/600x600bb.jpg",
+          "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/e3/d3/32/e3d33257-bfd5-8dea-acf0-44d594a58931/mzaf_1284478772471596263.plus.aac.p.m4a"
+        },
+        "reference_url": null,
+        "copy_count": 0
       },
       {
         "id": "style_002",
         "name": "Rockabilly Jive",
-        "tags": ["rockabilly", "upbeat", "double bass slap", "twangy guitar", "elvis style", "12-bar blues"],
+        "tags": [
+          "rockabilly",
+          "upbeat",
+          "double bass slap",
+          "twangy guitar",
+          "elvis style",
+          "12-bar blues"
+        ],
         "genre_id": "genre_1950s_rockabilly",
         "description": "摇滚乐的起源风格",
-        "bpm_range": "140-180"
+        "bpm_range": "140-180",
+        "audio_type": "url",
+        "audio_source": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/c6/ec/2a/c6ec2a92-ffe4-2c99-a7fe-7184ad6c422e/mzaf_18174769531383869947.plus.aac.p.m4a",
+        "audio_platform": "itunes",
+        "audio_metadata": {
+          "platform": "itunes",
+          "track_id": 388127937,
+          "track_name": "Jailhouse Rock",
+          "artist_name": "Elvis Presley",
+          "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/10/53/1d/10531d93-d6d2-996d-516f-5ea58bc4dbfa/884977724691.jpg/600x600bb.jpg",
+          "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/c6/ec/2a/c6ec2a92-ffe4-2c99-a7fe-7184ad6c422e/mzaf_18174769531383869947.plus.aac.p.m4a"
+        },
+        "reference_url": null,
+        "copy_count": 0
       },
       {
         "id": "style_003",
         "name": "Psychedelic Rock",
-        "tags": ["psychedelic rock", "60s", "sitar", "fuzz guitar", "dreamy vocals", "kaleidoscope"],
+        "tags": [
+          "psychedelic rock",
+          "60s",
+          "sitar",
+          "fuzz guitar",
+          "dreamy vocals",
+          "kaleidoscope"
+        ],
         "genre_id": "genre_1960s_psychedelic",
         "description": "60年代迷幻摇滚",
-        "bpm_range": "100-130"
+        "bpm_range": "100-130",
+        "audio_type": "url",
+        "audio_source": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/e7/f1/84/e7f1844f-ac06-551d-13e1-1e1bd00a0453/mzaf_7249631128135074955.plus.aac.p.m4a",
+        "audio_platform": "itunes",
+        "audio_metadata": {
+          "platform": "itunes",
+          "track_id": 344655790,
+          "track_name": "Purple Haze (Live)",
+          "artist_name": "Jimi Hendrix",
+          "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music/65/0c/a5/mzi.jnblwjyk.jpg/600x600bb.jpg",
+          "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/e7/f1/84/e7f1844f-ac06-551d-13e1-1e1bd00a0453/mzaf_7249631128135074955.plus.aac.p.m4a"
+        },
+        "reference_url": null,
+        "copy_count": 0
       },
       {
         "id": "style_004",
         "name": "Motown Soul",
-        "tags": ["motown", "northern soul", "brass section", "groovy bass", "tambourine", "female lead"],
+        "tags": [
+          "motown",
+          "northern soul",
+          "brass section",
+          "groovy bass",
+          "tambourine",
+          "female lead"
+        ],
         "genre_id": "genre_1960s_motown",
         "description": "底特律灵魂乐风格",
-        "bpm_range": "100-120"
+        "bpm_range": "100-120",
+        "audio_type": "url",
+        "audio_source": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/a1/f9/bc/a1f9bcbb-a0a6-914f-1515-bd44874ace79/mzaf_15973904323210130309.plus.aac.p.m4a",
+        "audio_platform": "itunes",
+        "audio_metadata": {
+          "platform": "itunes",
+          "track_id": 1425214505,
+          "track_name": "My Girl",
+          "artist_name": "The Temptations",
+          "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/d0/c4/a3/d0c4a35c-a99d-58b5-1e6e-c7d58d00b975/06UMGIM08638.rgb.jpg/600x600bb.jpg",
+          "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/a1/f9/bc/a1f9bcbb-a0a6-914f-1515-bd44874ace79/mzaf_15973904323210130309.plus.aac.p.m4a"
+        },
+        "reference_url": null,
+        "copy_count": 0
       },
       {
         "id": "style_005",
         "name": "British Invasion",
-        "tags": ["beat music", "liverpool sound", "jangly guitar", "catchy chorus", "harmonica"],
+        "tags": [
+          "beat music",
+          "liverpool sound",
+          "jangly guitar",
+          "catchy chorus",
+          "harmonica"
+        ],
         "genre_id": "genre_1960s_british",
         "description": "英伦入侵时期的流行摇滚",
-        "bpm_range": "120-140"
+        "bpm_range": "120-140",
+        "audio_type": "url",
+        "audio_source": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/62/2f/1e/622f1ed4-0ce6-ccbb-ba0c-a595d942bc9b/mzaf_8841129286398562133.plus.aac.p.m4a",
+        "audio_platform": "itunes",
+        "audio_metadata": {
+          "platform": "itunes",
+          "track_id": 1440765093,
+          "track_name": "(I Can't Get No) Satisfaction (Mono)",
+          "artist_name": "The Rolling Stones",
+          "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music112/v4/29/b7/81/29b781e5-3773-c87e-c6a8-82581e53d270/13ABKIM00053.rgb.jpg/600x600bb.jpg",
+          "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/62/2f/1e/622f1ed4-0ce6-ccbb-ba0c-a595d942bc9b/mzaf_8841129286398562133.plus.aac.p.m4a"
+        },
+        "reference_url": null,
+        "copy_count": 0
       },
       {
         "id": "style_006",
         "name": "Classic Disco",
-        "tags": ["disco", "four-on-the-floor", "string hits", "funky bass octave", "falsetto", "party"],
+        "tags": [
+          "disco",
+          "four-on-the-floor",
+          "string hits",
+          "funky bass octave",
+          "falsetto",
+          "party"
+        ],
         "genre_id": "genre_1970s_disco",
         "description": "经典迪斯科舞曲",
-        "bpm_range": "110-130"
+        "bpm_range": "110-130",
+        "audio_type": "url",
+        "audio_source": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/e3/18/fa/e318fa11-3a88-0664-0558-66adafe8ba73/mzaf_13319100409225415690.plus.aac.p.m4a",
+        "audio_platform": "itunes",
+        "audio_metadata": {
+          "platform": "itunes",
+          "track_id": 1445663759,
+          "track_name": "Stayin' Alive (From \"Saturday Night Fever\" Soundtrack)",
+          "artist_name": "Bee Gees",
+          "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/63/7a/33/637a3301-f7a9-dce5-e312-b9da8f4022a1/17UMGIM87578.rgb.jpg/600x600bb.jpg",
+          "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/e3/18/fa/e318fa11-3a88-0664-0558-66adafe8ba73/mzaf_13319100409225415690.plus.aac.p.m4a"
+        },
+        "reference_url": null,
+        "copy_count": 0
       },
       {
         "id": "style_007",
         "name": "Hard Rock Anthem",
-        "tags": ["hard rock", "70s", "distorted riffs", "powerful drums", "high vocals", "arena rock"],
+        "tags": [
+          "hard rock",
+          "70s",
+          "distorted riffs",
+          "powerful drums",
+          "high vocals",
+          "arena rock"
+        ],
         "genre_id": "genre_1970s_hardrock",
         "description": "70年代硬摇滚",
-        "bpm_range": "120-140"
+        "bpm_range": "120-140",
+        "audio_type": "url",
+        "audio_source": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/bb/5a/d7/bb5ad75c-6d1c-d7d6-cfa2-401cba719280/mzaf_5645276345020733223.plus.aac.p.m4a",
+        "audio_platform": "itunes",
+        "audio_metadata": {
+          "platform": "itunes",
+          "track_id": 836967297,
+          "track_name": "Whole Lotta Love",
+          "artist_name": "Led Zeppelin",
+          "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/d5/12/a0/d512a003-fbb3-9e46-b956-0bb81ff937e9/603497920075.jpg/600x600bb.jpg",
+          "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/bb/5a/d7/bb5ad75c-6d1c-d7d6-cfa2-401cba719280/mzaf_5645276345020733223.plus.aac.p.m4a"
+        },
+        "reference_url": null,
+        "copy_count": 0
       },
       {
         "id": "style_008",
         "name": "Yacht Rock",
-        "tags": ["yacht rock", "smooth", "rhodes piano", "saxophone solo", "breezy", "laid back"],
+        "tags": [
+          "yacht rock",
+          "smooth",
+          "rhodes piano",
+          "saxophone solo",
+          "breezy",
+          "laid back"
+        ],
         "genre_id": "genre_1970s_yacht",
         "description": "轻柔摇滚风格",
-        "bpm_range": "90-110"
+        "bpm_range": "90-110",
+        "audio_type": "url",
+        "audio_source": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/ef/fd/02/effd02a8-245f-9150-d06c-6d1c996d1d1e/mzaf_11248013209902447223.plus.aac.p.m4a",
+        "audio_platform": "itunes",
+        "audio_metadata": {
+          "platform": "itunes",
+          "track_id": 1110557400,
+          "track_name": "What a Fool Believes (2016 Remastered)",
+          "artist_name": "The Doobie Brothers",
+          "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/7a/dd/74/7add74c3-49dc-1b4b-7555-9adc57c4c0e7/603497878000.jpg/600x600bb.jpg",
+          "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/ef/fd/02/effd02a8-245f-9150-d06c-6d1c996d1d1e/mzaf_11248013209902447223.plus.aac.p.m4a"
+        },
+        "reference_url": null,
+        "copy_count": 0
       },
       {
         "id": "style_009",
         "name": "Synthwave / Outrun",
-        "tags": ["synthwave", "retrowave", "arpeggiated bass", "analog synth", "driving beat", "night drive"],
+        "tags": [
+          "synthwave",
+          "retrowave",
+          "arpeggiated bass",
+          "analog synth",
+          "driving beat",
+          "night drive"
+        ],
         "genre_id": "genre_1980s_synthwave",
         "description": "复古电子合成器风格",
-        "bpm_range": "100-120"
+        "bpm_range": "100-120",
+        "audio_type": "url",
+        "audio_source": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/0a/de/fd/0adefd5b-145a-1cc9-f3b5-be89fd0232b9/mzaf_4322553693875273982.plus.aac.p.m4a",
+        "audio_platform": "itunes",
+        "audio_metadata": {
+          "platform": "itunes",
+          "track_id": 1442447970,
+          "track_name": "Nightcall",
+          "artist_name": "Kavinsky",
+          "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/c1/2d/fe/c12dfe8f-cdf6-e179-d69a-8ec35f760266/00602537248681.rgb.jpg/600x600bb.jpg",
+          "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/0a/de/fd/0adefd5b-145a-1cc9-f3b5-be89fd0232b9/mzaf_4322553693875273982.plus.aac.p.m4a"
+        },
+        "reference_url": null,
+        "copy_count": 0
       },
       {
         "id": "style_010",
         "name": "Japanese City Pop",
-        "tags": ["city pop", "j-pop 80s", "funky bass", "plastic love vibe", "female vocal", "urban"],
+        "tags": [
+          "city pop",
+          "j-pop 80s",
+          "funky bass",
+          "plastic love vibe",
+          "female vocal",
+          "urban"
+        ],
         "genre_id": "genre_1980s_citypop",
         "description": "80年代日本城市流行",
-        "bpm_range": "100-120"
+        "bpm_range": "100-120",
+        "audio_type": "url",
+        "audio_source": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/bf/83/69/bf8369db-79cc-822e-d36f-37b2e6fdb451/mzaf_10229507402446470387.plus.aac.p.m4a",
+        "audio_platform": "itunes",
+        "audio_metadata": {
+          "platform": "itunes",
+          "track_id": 1541673399,
+          "track_name": "Plastic Love",
+          "artist_name": "Mariya Takeuchi",
+          "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/1b/bf/7d/1bbf7d0d-fe41-4e4b-29d0-7feb373a9e4c/190295078515.jpg/600x600bb.jpg",
+          "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/bf/83/69/bf8369db-79cc-822e-d36f-37b2e6fdb451/mzaf_10229507402446470387.plus.aac.p.m4a"
+        },
+        "reference_url": null,
+        "copy_count": 0
       },
       {
         "id": "style_011",
         "name": "Post-Punk / Goth",
-        "tags": ["post-punk", "goth rock", "flanger bass", "deep vocals", "dark atmosphere", "drum machine"],
+        "tags": [
+          "post-punk",
+          "goth rock",
+          "flanger bass",
+          "deep vocals",
+          "dark atmosphere",
+          "drum machine"
+        ],
         "genre_id": "genre_1980s_postpunk",
         "description": "后朋克哥特风格",
-        "bpm_range": "110-130"
+        "bpm_range": "110-130",
+        "audio_type": "url",
+        "audio_source": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/c3/0a/76/c30a76c3-a2b1-b27f-0fed-3e86d2303225/mzaf_4666448702799715339.plus.aac.p.m4a",
+        "audio_platform": "itunes",
+        "audio_metadata": {
+          "platform": "itunes",
+          "track_id": 1511732885,
+          "track_name": "Love Will Tear Us Apart (2020 Remaster)",
+          "artist_name": "Joy Division",
+          "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/d8/1b/ab/d81bab25-6c62-0963-c703-629f7cd7c776/190295262402.jpg/600x600bb.jpg",
+          "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/c3/0a/76/c30a76c3-a2b1-b27f-0fed-3e86d2303225/mzaf_4666448702799715339.plus.aac.p.m4a"
+        },
+        "reference_url": null,
+        "copy_count": 0
       },
       {
         "id": "style_012",
         "name": "Boom Bap Hip-Hop",
-        "tags": ["90s hip hop", "boom bap", "jazz samples", "scratching", "mpc60 drums", "street vibe"],
+        "tags": [
+          "90s hip hop",
+          "boom bap",
+          "jazz samples",
+          "scratching",
+          "mpc60 drums",
+          "street vibe"
+        ],
         "genre_id": "genre_1990s_boombap",
         "description": "90年代经典嘻哈",
-        "bpm_range": "85-100"
+        "bpm_range": "85-100",
+        "audio_type": "url",
+        "audio_source": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/a1/a6/4c/a1a64cde-39c4-e3a9-c3a1-66a9fec243a5/mzaf_9278166017189245935.plus.aac.p.m4a",
+        "audio_platform": "itunes",
+        "audio_metadata": {
+          "platform": "itunes",
+          "track_id": 1223060392,
+          "track_name": "N.Y. State of Mind",
+          "artist_name": "Nas",
+          "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/ae/68/a7/ae68a7c5-8490-b9b4-fb6a-ed9216eedab2/886445395167.jpg/600x600bb.jpg",
+          "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/a1/a6/4c/a1a64cde-39c4-e3a9-c3a1-66a9fec243a5/mzaf_9278166017189245935.plus.aac.p.m4a"
+        },
+        "reference_url": null,
+        "copy_count": 0
       },
       {
         "id": "style_013",
         "name": "Seattle Grunge",
-        "tags": ["grunge", "90s alternative", "distorted chords", "loud-quiet-loud dynamics", "angst"],
+        "tags": [
+          "grunge",
+          "90s alternative",
+          "distorted chords",
+          "loud-quiet-loud dynamics",
+          "angst"
+        ],
         "genre_id": "genre_1990s_grunge",
         "description": "西雅图垃圾摇滚",
-        "bpm_range": "100-130"
+        "bpm_range": "100-130",
+        "audio_type": "url",
+        "audio_source": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/44/8d/b2/448db2c4-5185-9eb5-66c2-d1e7182687ad/mzaf_14615718485326206820.plus.aac.p.m4a",
+        "audio_platform": "itunes",
+        "audio_metadata": {
+          "platform": "itunes",
+          "track_id": 1413921155,
+          "track_name": "Smells Like Teen Spirit",
+          "artist_name": "Nirvana",
+          "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/7b/58/c2/7b58c21a-2b51-2bb2-e59a-9bb9b96ad8c3/00602567924166.rgb.jpg/600x600bb.jpg",
+          "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/44/8d/b2/448db2c4-5185-9eb5-66c2-d1e7182687ad/mzaf_14615718485326206820.plus.aac.p.m4a"
+        },
+        "reference_url": null,
+        "copy_count": 0
       },
       {
         "id": "style_014",
         "name": "Eurodance",
-        "tags": ["eurodance", "90s dance", "female hook", "male rap verse", "high bpm", "synth stab"],
+        "tags": [
+          "eurodance",
+          "90s dance",
+          "female hook",
+          "male rap verse",
+          "high bpm",
+          "synth stab"
+        ],
         "genre_id": "genre_1990s_eurodance",
         "description": "90年代欧陆舞曲",
-        "bpm_range": "130-150"
+        "bpm_range": "130-150",
+        "audio_type": "url",
+        "audio_source": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/d5/a4/a1/d5a4a1e8-fd7f-150f-2852-54cce8ea1072/mzaf_10786928577654865504.plus.aac.p.m4a",
+        "audio_platform": "itunes",
+        "audio_metadata": {
+          "platform": "itunes",
+          "track_id": 880365276,
+          "track_name": "Rhythm of the Night",
+          "artist_name": "Corona",
+          "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/0f/1a/36/0f1a362d-d376-7e1f-8ade-fff028d52d3c/825646282784.jpg/600x600bb.jpg",
+          "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/d5/a4/a1/d5a4a1e8-fd7f-150f-2852-54cce8ea1072/mzaf_10786928577654865504.plus.aac.p.m4a"
+        },
+        "reference_url": null,
+        "copy_count": 0
       },
       {
         "id": "style_015",
         "name": "Pop Punk",
-        "tags": ["pop punk", "2000s", "power chords", "fast tempo", "teenage rebellion", "nasal vocals"],
+        "tags": [
+          "pop punk",
+          "2000s",
+          "power chords",
+          "fast tempo",
+          "teenage rebellion",
+          "nasal vocals"
+        ],
         "genre_id": "genre_2000s_poppunk",
         "description": "2000年代流行朋克",
-        "bpm_range": "160-190"
+        "bpm_range": "160-190",
+        "audio_type": "url",
+        "audio_source": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/5b/31/c5/5b31c525-5027-f73a-d5bd-e7213c5a830d/mzaf_9672091269527386559.plus.aac.p.m4a",
+        "audio_platform": "itunes",
+        "audio_metadata": {
+          "platform": "itunes",
+          "track_id": 1531763463,
+          "track_name": "All The Small Things",
+          "artist_name": "blink-182",
+          "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/7a/c4/52/7ac452a0-7d32-1d91-4058-489a45ac3d83/20UMGIM78120.rgb.jpg/600x600bb.jpg",
+          "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/5b/31/c5/5b31c525-5027-f73a-d5bd-e7213c5a830d/mzaf_9672091269527386559.plus.aac.p.m4a"
+        },
+        "reference_url": null,
+        "copy_count": 0
       },
       {
         "id": "style_016",
         "name": "Nu Metal",
-        "tags": ["nu metal", "drop tuning guitar", "rapping", "turntable scratch", "aggressive", "angst"],
+        "tags": [
+          "nu metal",
+          "drop tuning guitar",
+          "rapping",
+          "turntable scratch",
+          "aggressive",
+          "angst"
+        ],
         "genre_id": "genre_2000s_numetal",
         "description": "新金属风格",
-        "bpm_range": "90-130"
+        "bpm_range": "90-130",
+        "audio_type": "url",
+        "audio_source": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/17/ef/7e/17ef7ef9-8f1e-8be0-15c3-1d3e68b9b500/mzaf_5007591422695565025.plus.aac.p.m4a",
+        "audio_platform": "itunes",
+        "audio_metadata": {
+          "platform": "itunes",
+          "track_id": 1526170285,
+          "track_name": "In the End",
+          "artist_name": "LINKIN PARK",
+          "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/d9/5f/35/d95f35e4-11bb-05d7-bb26-d65ce620d920/093624893219.jpg/600x600bb.jpg",
+          "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/17/ef/7e/17ef7ef9-8f1e-8be0-15c3-1d3e68b9b500/mzaf_5007591422695565025.plus.aac.p.m4a"
+        },
+        "reference_url": null,
+        "copy_count": 0
       },
       {
         "id": "style_017",
         "name": "Festival EDM",
-        "tags": ["big room house", "edm festival", "build up", "heavy drop", "supersaw synths", "jump"],
+        "tags": [
+          "big room house",
+          "edm festival",
+          "build up",
+          "heavy drop",
+          "supersaw synths",
+          "jump"
+        ],
         "genre_id": "genre_2010s_edm",
         "description": "音乐节电子舞曲",
-        "bpm_range": "125-130"
+        "bpm_range": "125-130",
+        "audio_type": "url",
+        "audio_source": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/a1/75/48/a1754841-d05c-0402-bdee-16d724ae47a2/mzaf_16624181595158272558.plus.aac.p.m4a",
+        "audio_platform": "itunes",
+        "audio_metadata": {
+          "platform": "itunes",
+          "track_id": 1670593167,
+          "track_name": "Animals",
+          "artist_name": "Martin Garrix",
+          "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/6e/1e/f0/6e1ef055-195a-bb73-d5a8-5926058366a5/8712944577525.png/600x600bb.jpg",
+          "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/a1/75/48/a1754841-d05c-0402-bdee-16d724ae47a2/mzaf_16624181595158272558.plus.aac.p.m4a"
+        },
+        "reference_url": null,
+        "copy_count": 0
       },
       {
         "id": "style_018",
         "name": "Lofi Hip Hop",
-        "tags": ["lofi hip hop", "study beats", "vinyl crackle", "chill", "downtempo", "nostalgic"],
+        "tags": [
+          "lofi hip hop",
+          "study beats",
+          "vinyl crackle",
+          "chill",
+          "downtempo",
+          "nostalgic"
+        ],
         "genre_id": "genre_2010s_lofi",
         "description": "低保真嘻哈学习音乐",
-        "bpm_range": "70-90"
+        "bpm_range": "70-90",
+        "audio_type": "url",
+        "audio_source": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/5e/c2/00/5ec20040-e85b-77c0-6976-571fa4aebd3c/mzaf_8009078761645376098.plus.aac.p.m4a",
+        "audio_platform": "itunes",
+        "audio_metadata": {
+          "platform": "itunes",
+          "track_id": 1078923526,
+          "track_name": "Feather (feat. Cise Starr & Akin)",
+          "artist_name": "Nujabes",
+          "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/ad/18/6b/ad186b39-cd19-fa4d-abe0-bf6860cd8d9d/POCS-30003_jkt.jpg/600x600bb.jpg",
+          "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/5e/c2/00/5ec20040-e85b-77c0-6976-571fa4aebd3c/mzaf_8009078761645376098.plus.aac.p.m4a"
+        },
+        "reference_url": null,
+        "copy_count": 0
       },
       {
         "id": "style_019",
         "name": "Cyberpunk Phonk",
-        "tags": ["drift phonk", "cowbell", "distorted 808", "memphis rap samples", "high energy"],
+        "tags": [
+          "drift phonk",
+          "cowbell",
+          "distorted 808",
+          "memphis rap samples",
+          "high energy"
+        ],
         "genre_id": "genre_2020s_phonk",
         "description": "赛博朋克漂移音乐",
-        "bpm_range": "130-145"
+        "bpm_range": "130-145",
+        "audio_type": "url",
+        "audio_source": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview123/v4/ee/b9/a6/eeb9a61e-7d8b-3803-a143-f80af6c1a4f1/mzaf_1478046186769652296.plus.aac.p.m4a",
+        "audio_platform": "itunes",
+        "audio_metadata": {
+          "platform": "itunes",
+          "track_id": 1667656070,
+          "track_name": "Hellraiser",
+          "artist_name": "Kordhell",
+          "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music113/v4/af/8d/58/af8d5859-4637-c6a8-edba-0df4e9b7ecf9/22UM1IM39709.rgb.jpg/600x600bb.jpg",
+          "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview123/v4/ee/b9/a6/eeb9a61e-7d8b-3803-a143-f80af6c1a4f1/mzaf_1478046186769652296.plus.aac.p.m4a"
+        },
+        "reference_url": null,
+        "copy_count": 0
       },
       {
         "id": "style_020",
         "name": "Hyperpop",
-        "tags": ["hyperpop", "autotune", "metallic snare", "glitch", "bubblegum bass", "chaotic"],
+        "tags": [
+          "hyperpop",
+          "autotune",
+          "metallic snare",
+          "glitch",
+          "bubblegum bass",
+          "chaotic"
+        ],
         "genre_id": "genre_2020s_hyperpop",
         "description": "超流行实验电子",
-        "bpm_range": "140-170"
+        "bpm_range": "140-170",
+        "audio_type": "url",
+        "audio_source": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/b8/04/56/b8045633-cbde-f2cd-5cfa-af991fafe93d/mzaf_11443081330584356771.plus.aac.p.m4a",
+        "audio_platform": "itunes",
+        "audio_metadata": {
+          "platform": "itunes",
+          "track_id": 1521674865,
+          "track_name": "ringtone (Remix) [feat. Charli XCX, Rico Nasty, Kero Kero Bonito]",
+          "artist_name": "100 gecs",
+          "artwork_url": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/1c/4e/bd/1c4ebdba-07dd-0d7f-65c4-02e3e0035b07/075679809230.jpg/600x600bb.jpg",
+          "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/b8/04/56/b8045633-cbde-f2cd-5cfa-af991fafe93d/mzaf_11443081330584356771.plus.aac.p.m4a"
+        },
+        "reference_url": null,
+        "copy_count": 0
       }
     ],
     "folders": []

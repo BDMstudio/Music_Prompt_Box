@@ -29,6 +29,8 @@ class Style(Base):
     bpm_range: Mapped[Optional[str]] = mapped_column(String(20), nullable=True)
     audio_type: Mapped[Optional[str]] = mapped_column(String(10), nullable=True)
     audio_source: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
+    audio_platform: Mapped[Optional[str]] = mapped_column(String(20), nullable=True)
+    audio_metadata: Mapped[Optional[str]] = mapped_column(Text, nullable=True)  # JSON
     reference_url: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
     copy_count: Mapped[int] = mapped_column(Integer, default=0)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)

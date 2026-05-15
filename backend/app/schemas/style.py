@@ -13,6 +13,8 @@ class StyleBase(BaseModel):
     bpm_range: Optional[str] = Field(None, max_length=20)
     audio_type: Optional[Literal["local", "url"]] = None
     audio_source: Optional[str] = None
+    audio_platform: Optional[Literal["local", "url", "itunes"]] = None
+    audio_metadata: Optional[str] = None  # JSON string
     reference_url: Optional[str] = None
 
 
@@ -28,6 +30,8 @@ class StyleUpdate(BaseModel):
     bpm_range: Optional[str] = Field(None, max_length=20)
     audio_type: Optional[Literal["local", "url"]] = None
     audio_source: Optional[str] = None
+    audio_platform: Optional[Literal["local", "url", "itunes"]] = None
+    audio_metadata: Optional[str] = None  # JSON string
     reference_url: Optional[str] = None
 
 
@@ -41,6 +45,8 @@ class StyleResponse(BaseModel):
     bpm_range: Optional[str] = None
     audio_type: Optional[str] = None
     audio_source: Optional[str] = None
+    audio_platform: Optional[str] = None
+    audio_metadata: Optional[str] = None
     reference_url: Optional[str] = None
     copy_count: int = 0
     is_favorited: bool = False

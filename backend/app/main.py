@@ -13,6 +13,7 @@ from app.routers import (
     folders_router,
     tags_router,
     data_router,
+    itunes_router,
 )
 
 
@@ -44,6 +45,7 @@ app.include_router(styles_router)
 app.include_router(folders_router)
 app.include_router(tags_router)
 app.include_router(data_router)
+app.include_router(itunes_router)
 
 app.mount("/storage", StaticFiles(directory=str(settings.STORAGE_PATH)), name="storage")
 

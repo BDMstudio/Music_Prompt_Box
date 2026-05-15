@@ -17,7 +17,7 @@ const props = defineProps<{
 const stylesStore = useStylesStore()
 const tagsStore = useTagsStore()
 const foldersStore = useFoldersStore()
-const { play, isCurrentlyPlaying } = useAudio()
+const { playStyle, isCurrentlyPlaying, resolveAudioUrl } = useAudio()
 const { copy } = useClipboard()
 
 const showEditModal = ref(false)
@@ -25,11 +25,21 @@ const showDeleteConfirm = ref(false)
 const showFolderMenu = ref(false)
 
 const isPlaying = computed(() => isCurrentlyPlaying(props.style.id))
-const hasAudio = computed(() => !!props.style.audio_source)
+const hasAudio = computed(() => !!resolveAudioUrl(props.style))
+
+// Get display info for iTunes tracks
+const audioInfo = computed(() => {
+  if (!props.style.audio_metadata) return null
+  try {
+    return JSON.parse(props.style.audio_metadata)
+  } catch {
+    return null
+  }
+})
 
 function togglePlay() {
-  if (hasAudio.value && props.style.audio_source) {
-    play(props.style.id, props.style.audio_source)
+  if (hasAudio.value) {
+    playStyle(props.style)
   }
 }
 
@@ -126,6 +136,7 @@ async function addToFolder(folderId: string) {
         @click="togglePlay"
         class="w-9 h-9 rounded-full flex items-center justify-center transition-all duration-200 flex-shrink-0 border-2"
         :class="isPlaying ? 'bg-neon-magenta border-neon-magenta text-white animate-pulse-glow' : 'bg-transparent border-neon-cyan text-neon-cyan hover:bg-neon-cyan hover:text-void'"
+        :title="audioInfo ? `${audioInfo.track_name} - ${audioInfo.artist_name}` : '播放'"
       >
         <svg v-if="isPlaying" class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
           <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/>
@@ -134,6 +145,12 @@ async function addToFolder(folderId: string) {
           <path d="M8 5v14l11-7z"/>
         </svg>
       </button>
+    </div>
+
+    <!-- Audio source badge (iTunes indicator) -->
+    <div v-if="hasAudio && style.audio_platform === 'itunes' && audioInfo" class="text-[10px] text-neon-orange/60 font-mono mb-3 flex items-center gap-1">
+      <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
+      {{ audioInfo.track_name }} - {{ audioInfo.artist_name }}
     </div>
 
     <!-- Tags -->

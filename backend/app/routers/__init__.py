@@ -5,6 +5,7 @@ from app.routers.styles import router as styles_router
 from app.routers.folders import router as folders_router
 from app.routers.tags import router as tags_router
 from app.routers.data import router as data_router
+from app.routers.itunes import router as itunes_router
 
 __all__ = [
     "genres_router",
@@ -12,4 +13,5 @@ __all__ = [
     "folders_router",
     "tags_router",
     "data_router",
+    "itunes_router",
 ]
