@@ -18,9 +18,7 @@ watch(() => genresStore.selectedGenreId, (newId) => {
     <!-- Terminal-style header -->
     <div class="border-b border-neon-cyan/30">
       <div class="flex items-center gap-2 px-4 py-2 bg-neon-cyan/5 border-b border-neon-cyan/20">
-        <div class="h-2.5 w-2.5 rounded-full bg-neon-magenta"></div>
-        <div class="h-2.5 w-2.5 rounded-full bg-neon-cyan"></div>
-        <div class="h-2.5 w-2.5 rounded-full bg-neon-orange"></div>
+        <div class="h-3.5 w-0.5 rounded-full bg-neon-magenta"></div>
         <span class="ml-2 text-xs text-neon-cyan/80 font-mono">genre_tree.exe</span>
       </div>
       <div class="p-4">

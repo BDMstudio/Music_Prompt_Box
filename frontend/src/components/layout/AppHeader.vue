@@ -16,7 +16,7 @@ function openAddModal() {
 </script>
 
 <template>
-  <header class="h-[60px] flex-shrink-0 bg-void/90 backdrop-blur-md border-b-2 border-border-dim flex items-center justify-between px-4 md:px-6 overflow-hidden">
+  <header class="h-[60px] flex-shrink-0 bg-void/90 backdrop-blur-md border-b-2 border-border-dim flex items-center justify-between px-4 md:px-4 overflow-hidden">
     <!-- Logo -->
     <div class="flex items-center gap-2 md:gap-3 min-w-0">
       <div class="flex items-center gap-1.5 flex-shrink-0">
