@@ -31,9 +31,16 @@ body {
   animation: pulse-glow 1.5s infinite;
 }
 
-/* CRT scanlines overlay — applied globally */
+/* CRT scanlines overlay — applied globally, very light to not kill small text readability */
 .crt-scanlines {
-  background: linear-gradient(rgba(18, 16, 20, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+  background: linear-gradient(rgba(18, 16, 20, 0) 50%, rgba(0, 0, 0, 0.06) 50%);
+  background-size: 100% 4px;
+  pointer-events: none;
+}
+
+/* Strong scanlines — only on large text/decorative elements */
+.crt-scanlines-strong {
+  background: linear-gradient(rgba(18, 16, 20, 0) 50%, rgba(0, 0, 0, 0.20) 50%);
   background-size: 100% 4px;
   pointer-events: none;
 }

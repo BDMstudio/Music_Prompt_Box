@@ -34,7 +34,7 @@ function clear() {
       type="text"
       placeholder="搜索风格、标签、描述..."
       class="w-full sm:w-64 border-b-2 border-neon-magenta bg-black/50 text-neon-cyan font-mono text-sm pl-10 pr-8 py-2
-             placeholder:text-neon-magenta/40 focus:border-neon-cyan focus:shadow-neon-cyan focus:outline-none transition-colors"
+             placeholder:text-neon-magenta/65 focus:border-neon-cyan focus:shadow-neon-cyan focus:outline-none transition-colors"
     />
     <button
       v-if="query"

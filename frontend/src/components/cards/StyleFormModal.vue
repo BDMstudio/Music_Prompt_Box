@@ -221,7 +221,7 @@ async function handleSubmit() {
             <div class="h-3 w-3 rounded-full bg-neon-orange"></div>
           </div>
           <span class="font-mono text-xs text-neon-cyan/60">{{ isEdit ? 'edit_style.exe' : 'new_style.exe' }}</span>
-          <button @click="emit('close')" class="text-text-sub hover:text-neon-magenta transition">
+          <button @click="emit('close')" class="text-chrome/60 hover:text-neon-magenta transition">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
             </svg>
@@ -304,7 +304,7 @@ async function handleSubmit() {
                   <div v-if="audioDisplayInfo?.artist_name" class="text-xs text-chrome/60 font-mono truncate">{{ audioDisplayInfo.artist_name }}</div>
                   <div v-if="form.audio_platform === 'itunes'" class="text-[10px] text-neon-orange/70 font-mono mt-0.5">iTunes 30s Preview</div>
                 </div>
-                <button @click="clearAudioSelection()" class="p-1 text-text-sub hover:text-neon-magenta transition" title="移除">
+                <button @click="clearAudioSelection()" class="p-1 text-chrome/60 hover:text-neon-magenta transition" title="移除">
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
                   </svg>
@@ -353,7 +353,7 @@ async function handleSubmit() {
             <div v-if="showITunesPanel" class="border-2 border-neon-cyan/40 bg-black/50 p-3 space-y-3">
               <div class="flex items-center justify-between mb-1">
                 <span class="text-xs font-mono text-neon-cyan/70 uppercase tracking-wider">iTunes Search</span>
-                <button @click="toggleITunesPanel()" class="text-text-sub hover:text-neon-magenta transition p-1">
+                <button @click="toggleITunesPanel()" class="text-chrome/60 hover:text-neon-magenta transition p-1">
                   <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
                   </svg>
@@ -394,7 +394,7 @@ async function handleSubmit() {
                   <!-- Track info -->
                   <div class="flex-1 min-w-0">
                     <div class="text-sm text-chrome font-mono truncate group-hover:text-neon-cyan transition-colors">{{ track.track_name }}</div>
-                    <div class="text-xs text-text-sub font-mono truncate">{{ track.artist_name }}</div>
+                    <div class="text-xs text-chrome/60 font-mono truncate">{{ track.artist_name }}</div>
                   </div>
 
                   <!-- Genre badge -->
@@ -422,7 +422,7 @@ async function handleSubmit() {
               </div>
 
               <!-- No results -->
-              <div v-else-if="itunesQuery && !itunesLoading" class="text-center py-3 text-xs font-mono text-text-sub">
+              <div v-else-if="itunesQuery && !itunesLoading" class="text-center py-3 text-xs font-mono text-chrome/60">
                 未找到结果，尝试其他关键词
               </div>
             </div>

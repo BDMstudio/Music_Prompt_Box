@@ -11,9 +11,9 @@ const genresStore = useGenresStore()
 
 const title = computed(() => {
   if (genresStore.selectedGenre) {
-    return `${genresStore.selectedGenre.name} 风格`
+    return `${genresStore.selectedGenre.name} `
   }
-  return '全部风格'
+  return 'ALL styles'
 })
 
 const subtitle = computed(() => {
@@ -41,9 +41,10 @@ watch(() => stylesStore.page, () => {
       <!-- Title area -->
       <div class="mb-6">
         <div class="flex items-end justify-between mb-4">
-          <div>
+          <div class="relative">
             <h1 class="font-heading font-black text-3xl sm:text-4xl lg:text-5xl uppercase tracking-wider gradient-text leading-tight">{{ title }}</h1>
-            <p class="text-sm text-neon-magenta/60 font-mono mt-2 tracking-wider">{{ subtitle }}</p>
+            <div class="crt-scanlines-strong absolute inset-0 pointer-events-none"></div>
+            <p class="text-sm text-neon-magenta/80 font-mono mt-2 tracking-wider">{{ subtitle }}</p>
           </div>
         </div>
         

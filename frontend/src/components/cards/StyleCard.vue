@@ -77,7 +77,7 @@ async function addToFolder(folderId: string) {
           <button
             @click="showFolderMenu = !showFolderMenu"
             class="p-1.5 opacity-0 group-hover:opacity-100 hover:bg-neon-magenta/20 transition"
-            :class="style.is_favorited ? 'text-neon-orange opacity-100' : 'text-text-sub'"
+            :class="style.is_favorited ? 'text-neon-orange opacity-100' : 'text-chrome/50'"
             title="添加到收藏夹"
           >
             <svg class="w-4 h-4" :fill="style.is_favorited ? 'currentColor' : 'none'" stroke="currentColor" viewBox="0 0 24 24">
@@ -97,7 +97,7 @@ async function addToFolder(folderId: string) {
             >
               {{ folder.name }}
             </div>
-            <div v-if="foldersStore.folders.length === 0" class="px-3 py-2 text-sm text-text-sub font-mono">
+            <div v-if="foldersStore.folders.length === 0" class="px-3 py-2 text-sm text-chrome/60 font-mono">
               暂无收藏夹
             </div>
           </div>
@@ -106,7 +106,7 @@ async function addToFolder(folderId: string) {
         <!-- Edit button -->
         <button
           @click="showEditModal = true"
-          class="p-1.5 text-text-sub opacity-0 group-hover:opacity-100 hover:bg-neon-cyan/20 hover:text-neon-cyan transition"
+          class="p-1.5 text-chrome/50 opacity-0 group-hover:opacity-100 hover:bg-neon-cyan/20 hover:text-neon-cyan transition"
           title="编辑"
         >
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -117,7 +117,7 @@ async function addToFolder(folderId: string) {
         <!-- Delete button -->
         <button
           @click="showDeleteConfirm = true"
-          class="p-1.5 text-text-sub opacity-0 group-hover:opacity-100 hover:bg-neon-magenta/30 hover:text-neon-magenta transition"
+          class="p-1.5 text-chrome/50 opacity-0 group-hover:opacity-100 hover:bg-neon-magenta/30 hover:text-neon-magenta transition"
           title="删除"
         >
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -148,7 +148,7 @@ async function addToFolder(folderId: string) {
     </div>
 
     <!-- Audio source badge (iTunes indicator) -->
-    <div v-if="hasAudio && style.audio_platform === 'itunes' && audioInfo" class="text-[10px] text-neon-orange/60 font-mono mb-3 flex items-center gap-1">
+    <div v-if="hasAudio && style.audio_platform === 'itunes' && audioInfo" class="text-xs text-neon-orange/85 font-mono mb-3 flex items-center gap-1">
       <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
       {{ audioInfo.track_name }} - {{ audioInfo.artist_name }}
     </div>
@@ -159,12 +159,12 @@ async function addToFolder(folderId: string) {
     </div>
 
     <!-- Description -->
-    <p v-if="style.description" class="text-sm text-chrome/70 mb-4 line-clamp-2 font-mono">
+    <p v-if="style.description" class="text-sm text-chrome/85 mb-4 line-clamp-2 font-mono">
       {{ style.description }}
     </p>
 
     <!-- BPM -->
-    <div v-if="style.bpm_range" class="text-xs text-neon-orange/70 mb-4 font-mono uppercase tracking-wider">
+    <div v-if="style.bpm_range" class="text-xs text-neon-orange/90 mb-4 font-mono uppercase tracking-wider">
       > BPM: {{ style.bpm_range }}
     </div>
 

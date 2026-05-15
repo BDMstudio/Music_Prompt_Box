@@ -42,7 +42,7 @@ function copyEraPrompt() {
         <button
           v-if="hasChildren"
           @click.stop="toggleExpand"
-          class="w-4 h-4 flex items-center justify-center text-text-sub hover:text-neon-cyan"
+          class="w-4 h-4 flex items-center justify-center text-chrome/50 hover:text-neon-cyan"
         >
           <svg
             class="w-3 h-3 transition-transform duration-200"
@@ -75,7 +75,7 @@ function copyEraPrompt() {
               </svg>
             </button>
           </div>
-          <p v-if="genre.description" class="text-xs text-text-sub truncate mt-0.5 font-mono">
+          <p v-if="genre.description" class="text-xs text-chrome/60 truncate mt-0.5 font-mono">
             {{ genre.description }}
           </p>
         </div>

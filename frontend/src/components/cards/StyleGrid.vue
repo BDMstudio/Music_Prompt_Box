@@ -26,14 +26,14 @@ function nextPage() {
     </div>
 
     <!-- Empty -->
-    <div v-else-if="stylesStore.styles.length === 0" class="text-center py-20 text-text-sub">
+    <div v-else-if="stylesStore.styles.length === 0" class="text-center py-20 text-chrome/60">
       <div class="w-16 h-16 mx-auto mb-4 rounded-full border-2 border-neon-magenta/30 flex items-center justify-center">
         <svg class="w-8 h-8 text-neon-magenta/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
         </svg>
       </div>
       <p class="font-heading font-bold uppercase tracking-wider text-neon-cyan glow-text-cyan">没有找到匹配的风格</p>
-      <p class="text-sm mt-1 font-mono text-text-sub">尝试其他搜索词或筛选条件</p>
+      <p class="text-sm mt-1 font-mono text-chrome/60">尝试其他搜索词或筛选条件</p>
     </div>
 
     <!-- Content -->
@@ -58,7 +58,7 @@ function nextPage() {
         >
           上一页
         </button>
-        <span class="text-sm font-mono uppercase tracking-widest text-text-sub">
+        <span class="text-sm font-mono uppercase tracking-widest text-chrome/70">
           第 {{ stylesStore.page }} 页 / 共 {{ Math.ceil(stylesStore.total / stylesStore.size) }} 页
         </span>
         <button

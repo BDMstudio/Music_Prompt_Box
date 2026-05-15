@@ -94,12 +94,12 @@ function filterByFolder(folderId: string | null) {
               <path d="M10 4H4c-1.11 0-2 .89-2 2v12c0 1.1.89 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/>
             </svg>
             {{ folder.name }}
-            <span class="text-text-sub">({{ folder.style_count }})</span>
+            <span class="text-chrome/60">({{ folder.style_count }})</span>
           </div>
           <div class="flex items-center gap-1 opacity-0 group-hover:opacity-100">
             <button
               @click.stop="startEdit(folder.id, folder.name)"
-              class="p-1 hover:bg-neon-cyan/20 text-text-sub"
+              class="p-1 hover:bg-neon-cyan/20 text-chrome/60"
             >
               <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/>
@@ -107,7 +107,7 @@ function filterByFolder(folderId: string | null) {
             </button>
             <button
               @click.stop="removeFolder(folder.id)"
-              class="p-1 hover:bg-neon-magenta/30 text-text-sub hover:text-neon-magenta"
+              class="p-1 hover:bg-neon-magenta/30 text-chrome/60 hover:text-neon-magenta"
             >
               <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
@@ -117,7 +117,7 @@ function filterByFolder(folderId: string | null) {
         </div>
       </div>
 
-      <div v-if="foldersStore.folders.length === 0 && !showCreateInput" class="px-3 py-4 text-center text-sm text-text-sub font-mono">
+      <div v-if="foldersStore.folders.length === 0 && !showCreateInput" class="px-3 py-4 text-center text-sm text-chrome/60 font-mono">
         暂无收藏夹
       </div>
     </div>
@@ -142,7 +142,7 @@ function filterByFolder(folderId: string | null) {
         </button>
         <button
           @click="showCreateInput = false"
-          class="p-1 text-text-sub hover:text-neon-magenta"
+          class="p-1 text-chrome/60 hover:text-neon-magenta"
         >
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
@@ -152,7 +152,7 @@ function filterByFolder(folderId: string | null) {
     </div>
 
     <!-- Status bar -->
-    <div class="border-t-2 border-border-dim bg-void px-3 py-1 text-text-sub text-xs font-mono flex justify-between">
+    <div class="border-t-2 border-border-dim bg-void px-3 py-1 text-chrome/60 text-xs font-mono flex justify-between">
       <span>{{ foldersStore.folders.length }} 个收藏夹</span>
       <span class="text-neon-cyan/50">ready</span>
     </div>

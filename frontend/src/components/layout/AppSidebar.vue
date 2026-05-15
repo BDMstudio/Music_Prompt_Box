@@ -21,11 +21,11 @@ watch(() => genresStore.selectedGenreId, (newId) => {
         <div class="h-2.5 w-2.5 rounded-full bg-neon-magenta"></div>
         <div class="h-2.5 w-2.5 rounded-full bg-neon-cyan"></div>
         <div class="h-2.5 w-2.5 rounded-full bg-neon-orange"></div>
-        <span class="ml-2 text-xs text-neon-cyan/60 font-mono">genre_tree.exe</span>
+        <span class="ml-2 text-xs text-neon-cyan/80 font-mono">genre_tree.exe</span>
       </div>
       <div class="p-4">
         <h2 class="font-heading font-bold text-lg uppercase tracking-wider text-neon-cyan glow-text-cyan">流派时间线</h2>
-        <p class="text-xs text-text-sub mt-1 font-mono">> 选择流派筛选风格卡片</p>
+        <p class="text-xs text-chrome/60 mt-1 font-mono">&gt; 选择流派筛选风格卡片</p>
       </div>
     </div>
     
@@ -36,7 +36,7 @@ watch(() => genresStore.selectedGenreId, (newId) => {
         class="w-full text-left px-3 py-2 border-2 font-mono text-sm uppercase tracking-wider transition-all duration-200"
         :class="genresStore.selectedGenreId === null
           ? 'border-neon-magenta bg-neon-magenta/20 text-neon-magenta shadow-neon-magenta'
-          : 'border-border-dim text-text-sub hover:border-neon-cyan hover:text-neon-cyan'"
+          : 'border-border-dim text-chrome/70 hover:border-neon-cyan hover:text-neon-cyan'"
       >
         > 查看全部
       </button>
