@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 import type { Style, StyleCreateInput, StyleUpdateInput } from '@/types'
-import { fetchStyles, createStyle, updateStyle, deleteStyle, incrementStyleCopyCount } from '@/api/styles'
+import { fetchStyles, createStyle, updateStyle, deleteStyle, incrementStyleCopyCount, toggleStyleFavorite } from '@/api/styles'
 
 export const useStylesStore = defineStore('styles', () => {
   const styles = ref<Style[]>([])
@@ -85,6 +85,16 @@ export const useStylesStore = defineStore('styles', () => {
     }
   }
 
+  async function toggleFavorite(id: string) {
+    const isFavorited = await toggleStyleFavorite(id)
+    const style = styles.value.find(s => s.id === id)
+    if (style) {
+      style.is_favorited = isFavorited
+    }
+    // Refresh to update is_favorited counts on all items
+    await loadStyles()
+  }
+
   function setSearch(query: string) {
     searchQuery.value = query
     page.value = 1
@@ -119,6 +129,7 @@ export const useStylesStore = defineStore('styles', () => {
     editStyle,
     removeStyle,
     recordCopy,
+    toggleFavorite,
     setSearch,
     setGenreFilter,
     setFolderFilter,

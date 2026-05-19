@@ -3,6 +3,7 @@
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 
 from app.config import settings
@@ -53,3 +54,17 @@ app.mount("/storage", StaticFiles(directory=str(settings.STORAGE_PATH)), name="s
 @app.get("/api/health")
 async def health_check():
     return {"status": "ok", "version": settings.APP_VERSION}
+
+
+# Serve production frontend: mount /assets for JS/CSS, catch-all SPA fallback LAST
+if settings.FRONTEND_DIST_PATH.exists():
+    assets_path = settings.FRONTEND_DIST_PATH / "assets"
+    if assets_path.exists():
+        app.mount("/assets", StaticFiles(directory=str(assets_path)), name="frontend_assets")
+
+    @app.get("/{full_path:path}")
+    async def serve_frontend(full_path: str):
+        file_path = settings.FRONTEND_DIST_PATH / full_path
+        if file_path.exists() and file_path.is_file():
+            return FileResponse(file_path)
+        return FileResponse(settings.FRONTEND_DIST_PATH / "index.html")

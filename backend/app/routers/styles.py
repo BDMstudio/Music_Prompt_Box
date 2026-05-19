@@ -8,7 +8,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import joinedload
 
 from app.database import get_db
-from app.models import Genre, Style, FolderStyle
+from app.models import Genre, Style, FolderStyle, Folder
 from app.schemas import StyleCreate, StyleUpdate, StyleResponse, StyleListResponse
 from app.config import settings
 
@@ -247,3 +247,44 @@ async def increment_style_copy_count(style_id: str, db: AsyncSession = Depends(g
         )
 
     style.copy_count += 1
+
+
+@router.post("/{style_id}/toggle-favorite", status_code=status.HTTP_200_OK)
+async def toggle_style_favorite(style_id: str, db: AsyncSession = Depends(get_db)):
+    """Toggle favorite: add to first folder (or auto-create '收藏夹'), or remove from all folders."""
+    # Check if already favorited
+    existing = await db.execute(
+        select(FolderStyle).where(FolderStyle.style_id == style_id)
+    )
+    associations = existing.scalars().all()
+
+    if associations:
+        # Remove from all folders (unfavorite)
+        for assoc in associations:
+            await db.delete(assoc)
+        return {"is_favorited": False}
+
+    # Check if style exists
+    style_result = await db.execute(select(Style).where(Style.id == style_id))
+    style = style_result.scalar_one_or_none()
+    if not style:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="Style not found"
+        )
+
+    # Get first folder, or auto-create '收藏夹'
+    folders_result = await db.execute(select(Folder).order_by(Folder.created_at).limit(1))
+    folder = folders_result.scalar_one_or_none()
+
+    if not folder:
+        folder = Folder(
+            id=f"folder_{uuid.uuid4().hex[:8]}",
+            name="收藏夹",
+        )
+        db.add(folder)
+        await db.flush()
+
+    folder_style = FolderStyle(folder_id=folder.id, style_id=style_id)
+    db.add(folder_style)
+
+    return {"is_favorited": True}

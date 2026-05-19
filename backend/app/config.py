@@ -22,6 +22,9 @@ class Settings(BaseSettings):
     STORAGE_PATH: Path = Path("./storage")
     AUDIO_PATH: Path = Path("./storage/audio")
 
+    # Frontend dist (served in production)
+    FRONTEND_DIST_PATH: Path = Path("../frontend/dist")
+
     # CORS
     CORS_ORIGINS: list[str] = ["http://localhost:5173", "http://127.0.0.1:5173"]
 

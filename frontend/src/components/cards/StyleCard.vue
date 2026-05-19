@@ -8,7 +8,6 @@ import { useAudio } from '@/composables/useAudio'
 import { useClipboard } from '@/composables/useClipboard'
 import { useStylesStore } from '@/stores/styles'
 import { useTagsStore } from '@/stores/tags'
-import { useFoldersStore } from '@/stores/folders'
 
 const props = defineProps<{
   style: Style
@@ -16,16 +15,18 @@ const props = defineProps<{
 
 const stylesStore = useStylesStore()
 const tagsStore = useTagsStore()
-const foldersStore = useFoldersStore()
 const { playStyle, isCurrentlyPlaying, resolveAudioUrl } = useAudio()
 const { copy } = useClipboard()
 
 const showEditModal = ref(false)
 const showDeleteConfirm = ref(false)
-const showFolderMenu = ref(false)
 
 const isPlaying = computed(() => isCurrentlyPlaying(props.style.id))
 const hasAudio = computed(() => !!resolveAudioUrl(props.style))
+
+async function toggleFav() {
+  await stylesStore.toggleFavorite(props.style.id)
+}
 
 // Get display info for iTunes tracks
 const audioInfo = computed(() => {
@@ -54,12 +55,6 @@ async function handleDelete() {
   await stylesStore.removeStyle(props.style.id)
   showDeleteConfirm.value = false
 }
-
-async function addToFolder(folderId: string) {
-  await foldersStore.addToFolder(folderId, props.style.id)
-  showFolderMenu.value = false
-  await stylesStore.loadStyles()
-}
 </script>
 
 <template>
@@ -72,36 +67,17 @@ async function addToFolder(folderId: string) {
       </span>
       
       <div class="flex items-center gap-1">
-        <!-- Folder button -->
-        <div class="relative">
-          <button
-            @click="showFolderMenu = !showFolderMenu"
-            class="p-1.5 opacity-0 group-hover:opacity-100 hover:bg-neon-magenta/20 transition"
-            :class="style.is_favorited ? 'text-neon-orange opacity-100' : 'text-chrome/50'"
-            title="添加到收藏夹"
-          >
-            <svg class="w-4 h-4" :fill="style.is_favorited ? 'currentColor' : 'none'" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
-            </svg>
-          </button>
-
-          <div
-            v-if="showFolderMenu"
-            class="absolute right-0 top-full mt-1 w-44 bg-panel-solid border-2 border-neon-cyan shadow-neon-cyan z-10 py-1"
-          >
-            <div
-              v-for="folder in foldersStore.folders"
-              :key="folder.id"
-              @click="addToFolder(folder.id)"
-              class="px-3 py-2 text-sm font-mono text-chrome hover:bg-neon-cyan/10 cursor-pointer"
-            >
-              {{ folder.name }}
-            </div>
-            <div v-if="foldersStore.folders.length === 0" class="px-3 py-2 text-sm text-chrome/60 font-mono">
-              暂无收藏夹
-            </div>
-          </div>
-        </div>
+        <!-- Favorite toggle button -->
+        <button
+          @click="toggleFav"
+          class="p-1.5 hover:bg-neon-magenta/20 transition"
+          :class="style.is_favorited ? 'text-neon-orange opacity-100' : 'text-chrome/50 opacity-0 group-hover:opacity-100'"
+          :title="style.is_favorited ? '取消收藏' : '添加到收藏夹'"
+        >
+          <svg class="w-4 h-4" :fill="style.is_favorited ? 'currentColor' : 'none'" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+          </svg>
+        </button>
 
         <!-- Edit button -->
         <button

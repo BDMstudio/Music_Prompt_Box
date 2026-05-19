@@ -36,3 +36,8 @@ export async function deleteStyle(id: string): Promise<void> {
 export async function incrementStyleCopyCount(id: string): Promise<void> {
   await apiClient.post(`/styles/${id}/copy`)
 }
+
+export async function toggleStyleFavorite(id: string): Promise<boolean> {
+  const response = await apiClient.post<{ is_favorited: boolean }>(`/styles/${id}/toggle-favorite`)
+  return response.data.is_favorited
+}
