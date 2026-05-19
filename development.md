@@ -147,12 +147,30 @@
 |----------|------|------|
 | **本地上传** | 用户上传 MP3 文件到服务器 | `/audio/synthwave_ref.mp3` |
 | **外部链接** | 直接播放 `.mp3` 等音频链接 | `https://example.com/demo.mp3` |
+| **iTunes 试听** | 通过 iTunes Search API 获取 30s 预览片段 | `https://audio.itunes.apple.com/...` |
 
 #### 2.4.2 播放行为
 
 - **互斥播放**: 同一时间只能播放一个音频，点击新的播放按钮会停止当前播放
-- **播放状态**: 播放按钮显示播放/暂停状态，带有脉冲动画
-- **进度条**: 显示当前播放进度（可选功能）
+- **播放状态**: 卡片内播放按钮显示播放/暂停状态，带脉冲动画
+- **全局控制栏**: 底部固定 `AudioPlayerBar`，显示当前播放的封面、曲名、进度条、停止按钮
+- **进度拖动**: 通过 `useAudio` composable 的 `seek(percent)` 方法实现拖动跳转
+- **头部小球动画**: 播放期间头部三个圆球循环弹跳，空闲时 60s 周期性触发
+
+#### 2.4.3 全局音频播放器 (AudioPlayerBar)
+
+```
+┌──────────────────────────────────────────────────────────────┐
+│ [封面] 曲名 - 艺人          ━━━━━●━━━━━━━  [■ 停止]        │
+└──────────────────────────────────────────────────────────────┘
+  ↑ 固定在视口底部 (position: fixed, z-40)
+```
+
+特性：
+- **fixed 定位** — 脱离文档流，不随页面滚动
+- **滑入/滑出动画** — 播放时从底部滑入，停止时滑出
+- **进度条** — 已播/未播双色显示，支持拖动 seek
+- **曲目解析** — 从 style name 自动拆分曲名与艺人
 
 ---
 
@@ -428,29 +446,24 @@ CREATE INDEX idx_tag_stats_count ON tag_stats(copy_count DESC);
 
 ### 4.2 系统架构图
 
+#### 生产模式（单端口托管）
+
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │                         用户浏览器                               │
-│                     http://localhost:5173                       │
+│               http://localhost:8000 或 http://<LAN_IP>:8000     │
 └─────────────────────────────────────────────────────────────────┘
                                 │
-                                │ HTTP
+                                │ HTTP (单端口 8000)
                                 ▼
 ┌─────────────────────────────────────────────────────────────────┐
-│                      Vite Dev Server                            │
-│                     (前端静态资源)                               │
+│                    FastAPI Backend                               │
+│                   http://0.0.0.0:8000                           │
 │                                                                 │
-│   ┌─────────────┐  ┌─────────────┐  ┌─────────────┐            │
-│   │  Vue 3 SFC  │  │  Tailwind   │  │   Pinia     │            │
-│   │  Components │  │     CSS     │  │   Store     │            │
-│   └─────────────┘  └─────────────┘  └─────────────┘            │
-└─────────────────────────────────────────────────────────────────┘
-                                │
-                                │ REST API (JSON)
-                                ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                    FastAPI Backend                              │
-│                   http://localhost:8000                         │
+│   ┌─────────────────────────────────────────────────────────┐   │
+│   │  静态文件中间件 (StaticFiles)                              │   │
+│   │  托管 frontend/dist/ → SPA HTML + JS + CSS              │   │
+│   └─────────────────────────────────────────────────────────┘   │
 │                                                                 │
 │   ┌─────────────┐  ┌─────────────┐  ┌─────────────┐            │
 │   │   Routers   │  │  Services   │  │    Models   │            │
@@ -465,6 +478,14 @@ CREATE INDEX idx_tag_stats_count ON tag_stats(copy_count DESC);
 │                   /data/music_prompt_box.db                     │
 └─────────────────────────────────────────────────────────────────┘
 ```
+
+#### 开发模式（双进程热重载）
+
+```
+浏览器 → Vite Dev Server (:5173) ──proxy /api──→ FastAPI (:8000) → SQLite
+```
+
+> 开发模式下前端通过 `vite.config.ts` 配置 `/api` 代理转发到后端；生产模式下单端口对外，无需代理。
 
 ### 4.3 开发环境要求
 
@@ -482,55 +503,45 @@ CREATE INDEX idx_tag_stats_count ON tag_stats(copy_count DESC);
 ```
 music_prompt_box/
 ├── frontend/                    # 前端项目
+│   ├── dist/                    # Vite 构建产物（由后端托管）
 │   ├── public/
 │   │   └── favicon.ico
 │   ├── src/
 │   │   ├── assets/              # 静态资源
-│   │   │   ├── styles/
-│   │   │   │   └── main.css     # Tailwind 入口
-│   │   │   └── images/
+│   │   │   └── styles/
+│   │   │       └── main.css     # Tailwind 入口
 │   │   ├── components/          # Vue 组件
 │   │   │   ├── layout/
-│   │   │   │   ├── AppHeader.vue
-│   │   │   │   ├── AppSidebar.vue
-│   │   │   │   └── AppMain.vue
-│   │   │   ├── timeline/
-│   │   │   │   ├── GenreTree.vue
-│   │   │   │   ├── GenreNode.vue
-│   │   │   │   └── TimelineLine.vue
+│   │   │   │   ├── AppHeader.vue      # 顶部标题 + 小球动画
+│   │   │   │   ├── AppSidebar.vue     # 流派时间线导航
+│   │   │   │   └── AppMain.vue        # 主内容区容器
 │   │   │   ├── cards/
-│   │   │   │   ├── StyleCard.vue
-│   │   │   │   ├── StyleGrid.vue
-│   │   │   │   └── StyleForm.vue
-│   │   │   ├── audio/
-│   │   │   │   └── AudioPlayer.vue
+│   │   │   │   ├── StyleCard.vue      # 单张风格卡片
+│   │   │   │   ├── StyleGrid.vue      # 卡片网格
+│   │   │   │   └── StyleFormModal.vue # 添加/编辑表单
 │   │   │   ├── tags/
-│   │   │   │   ├── TagPill.vue
-│   │   │   │   └── HotTags.vue
+│   │   │   │   ├── TagPill.vue        # 单个标签（点击复制）
+│   │   │   │   └── HotTags.vue        # 热门标签云
 │   │   │   ├── folders/
-│   │   │   │   ├── FolderList.vue
-│   │   │   │   └── FolderModal.vue
+│   │   │   │   └── FolderList.vue     # 收藏夹
 │   │   │   └── common/
+│   │   │       ├── AudioPlayerBar.vue # 全局底部播放控制栏
 │   │   │       ├── SearchBox.vue
 │   │   │       ├── ConfirmModal.vue
 │   │   │       └── Toast.vue
 │   │   ├── composables/         # 组合式函数
-│   │   │   ├── useAudio.ts
-│   │   │   ├── useClipboard.ts
-│   │   │   └── useSearch.ts
+│   │   │   ├── useAudio.ts      # 全局音频状态 + 播放控制 + seek
+│   │   │   └── useClipboard.ts  # 剪贴板（SecureContext 降级）
 │   │   ├── stores/              # Pinia 状态管理
 │   │   │   ├── genres.ts
 │   │   │   ├── styles.ts
 │   │   │   ├── folders.ts
 │   │   │   └── tags.ts
 │   │   ├── api/                 # API 请求封装
-│   │   │   ├── client.ts        # Axios 实例
-│   │   │   ├── genres.ts
-│   │   │   ├── styles.ts
-│   │   │   └── folders.ts
+│   │   │   └── client.ts        # Axios 实例（baseURL=/api）
 │   │   ├── types/               # TypeScript 类型定义
 │   │   │   └── index.ts
-│   │   ├── App.vue
+│   │   ├── App.vue              # 根组件（挂载 AudioPlayerBar）
 │   │   └── main.ts
 │   ├── index.html
 │   ├── package.json
@@ -541,48 +552,41 @@ music_prompt_box/
 ├── backend/                     # 后端项目
 │   ├── app/
 │   │   ├── __init__.py
-│   │   ├── main.py              # FastAPI 入口
-│   │   ├── config.py            # 配置管理
-│   │   ├── database.py          # 数据库连接
+│   │   ├── main.py              # FastAPI 入口 + SPA 路由 + 静态文件托管
+│   │   ├── config.py            # 配置（含 FRONTEND_DIST_PATH）
+│   │   ├── database.py          # 异步 SQLAlchemy 引擎
 │   │   ├── models/              # SQLAlchemy 模型
-│   │   │   ├── __init__.py
 │   │   │   ├── genre.py
 │   │   │   ├── style.py
 │   │   │   ├── folder.py
 │   │   │   └── tag_stat.py
 │   │   ├── schemas/             # Pydantic 模式
-│   │   │   ├── __init__.py
 │   │   │   ├── genre.py
 │   │   │   ├── style.py
 │   │   │   └── folder.py
 │   │   ├── routers/             # API 路由
-│   │   │   ├── __init__.py
 │   │   │   ├── genres.py
 │   │   │   ├── styles.py
 │   │   │   ├── folders.py
 │   │   │   ├── tags.py
+│   │   │   ├── itunes.py        # iTunes Search API 代理
 │   │   │   └── data.py          # 导入/导出
-│   │   ├── services/            # 业务逻辑
-│   │   │   ├── __init__.py
-│   │   │   ├── genre_service.py
-│   │   │   ├── style_service.py
-│   │   │   └── export_service.py
-│   │   └── utils/
-│   │       └── file_handler.py  # 文件上传处理
+│   │   └── services/            # 业务逻辑
+│   │       ├── genre_service.py
+│   │       ├── style_service.py
+│   │       └── export_service.py
 │   ├── data/
-│   │   └── music_prompt_box.db  # SQLite 数据库文件
-│   ├── storage/
-│   │   └── audio/               # 音频文件存储
-│   │       ├── 1950s/
-│   │       ├── 1960s/
-│   │       └── ...
+│   │   └── music_prompt_box.db  # SQLite 数据库
 │   ├── seeds/
-│   │   └── initial_data.json    # 初始化数据
+│   │   ├── initial_data.json    # 初始种子数据
+│   │   ├── seed_db.py           # 初始化脚本
+│   │   └── add_styles.py        # 补充风格 + iTunes 音频匹配
+│   ├── storage/audio/           # 本地音频文件存储
 │   ├── requirements.txt
-│   └── pyproject.toml
+│   └── venv/
 │
-├── docs/                        # 项目文档
-│   └── api.md
+├── docs/
+│   └── music-embed-research.md
 ├── .gitignore
 ├── README.md
 └── development.md               # 本文档
@@ -947,3 +951,27 @@ Examples:
 | 版本 | 日期 | 变更内容 |
 |------|------|----------|
 | v1.0 | 2026-01-19 | 初始版本，完整需求定义 |
+| v1.1 | 2026-05-18 | 生产架构变更 + 多项功能增强 |
+
+### v1.1 变更明细 (2026-05-18)
+
+**架构变更**
+- 前后端双进程 → FastAPI 单端口 (8000) 生产托管，`StaticFiles` 中间件托管 `frontend/dist/`
+- 后端绑定 `0.0.0.0:8000`，支持局域网直接访问
+- 移除 Vite 前端服务器对生产环境的依赖
+
+**新增功能**
+- 全局音频播放控制栏 (`AudioPlayerBar`)：fixed 定位、进度拖动、停止按钮、滑入滑出动画
+- `useAudio` composable 扩展：暴露 `currentTime`、`duration`、`currentStyle`、`seek()` 方法
+- 头部小球弹跳动画：播放时循环，空闲时 60s 周期触发，物理弹跳 keyframes
+- iTunes Search API 代理路由 (`/api/itunes/search`)
+- 剪贴板 HTTP 降级：`window.isSecureContext === false` 时自动回退 `document.execCommand('copy')`
+
+**数据补充**
+- 新增 5 个子流派 (Funk, New Wave, Trap, Bedroom Pop, Punk Rock) 共 20 张卡片
+- 全部卡片通过 iTunes API 匹配 30s 试听片段
+- 当前总计：40 张风格卡片，25 个子流派
+
+**Bug 修复**
+- 修复播放器随页面滚动而非固定底部的问题：从 `AppMain` 内 absolute 改为 `App.vue` 根层级 fixed
+- 修复 CSS 动画同名 class 切换不重启问题：拆分 DOM 分支 (`v-if/v-else`) + 独立类名

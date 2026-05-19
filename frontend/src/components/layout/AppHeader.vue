@@ -1,10 +1,53 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch, nextTick, onMounted, onUnmounted } from 'vue'
 import FolderList from '../folders/FolderList.vue'
 import StyleFormModal from '../cards/StyleFormModal.vue'
+import { useAudio } from '@/composables/useAudio'
+
+const { isPlaying } = useAudio()
 
 const showFolders = ref(false)
 const showAddModal = ref(false)
+
+// ── Dot bounce animation ──
+type BounceMode = 'idle' | 'playing' | 'none'
+const bounceMode = ref<BounceMode>('none')
+
+let idleTimer: ReturnType<typeof setInterval> | null = null
+let idleResetTimer: ReturnType<typeof setTimeout> | null = null
+
+function triggerIdleBounce() {
+  // Don't interrupt playing animation
+  if (bounceMode.value === 'playing') return
+  bounceMode.value = 'idle'
+  if (idleResetTimer) clearTimeout(idleResetTimer)
+  idleResetTimer = setTimeout(() => {
+    if (bounceMode.value === 'idle') bounceMode.value = 'none'
+  }, 3000)
+}
+
+// Watch audio: toggle bounce with forced restart via nextTick
+watch(isPlaying, async (playing) => {
+  if (playing) {
+    // Force restart: clear animation first, then set in next frame
+    bounceMode.value = 'none'
+    await nextTick()
+    bounceMode.value = 'playing'
+  } else if (bounceMode.value === 'playing') {
+    bounceMode.value = 'none'
+  }
+})
+
+onMounted(() => {
+  idleTimer = setInterval(triggerIdleBounce, 60_000)
+  // First idle bounce after 5s so user sees it quickly
+  setTimeout(triggerIdleBounce, 5_000)
+})
+
+onUnmounted(() => {
+  if (idleTimer) clearInterval(idleTimer)
+  if (idleResetTimer) clearTimeout(idleResetTimer)
+})
 
 function toggleFolders() {
   showFolders.value = !showFolders.value
@@ -20,9 +63,35 @@ function openAddModal() {
     <!-- Logo -->
     <div class="flex items-center gap-2 md:gap-3 min-w-0">
       <div class="flex items-center gap-1.5 flex-shrink-0">
-        <div class="w-3 h-3 rounded-full bg-neon-magenta"></div>
-        <div class="w-3 h-3 rounded-full bg-neon-cyan"></div>
-        <div class="w-3 h-3 rounded-full bg-neon-orange"></div>
+        <div
+          v-if="bounceMode === 'playing'"
+          class="w-3 h-3 rounded-full bg-neon-magenta animate-bounce1-loop"
+        ></div>
+        <div
+          v-else-if="bounceMode === 'idle'"
+          class="w-3 h-3 rounded-full bg-neon-magenta animate-bounce1-once"
+        ></div>
+        <div v-else class="w-3 h-3 rounded-full bg-neon-magenta"></div>
+
+        <div
+          v-if="bounceMode === 'playing'"
+          class="w-3 h-3 rounded-full bg-neon-cyan animate-bounce2-loop"
+        ></div>
+        <div
+          v-else-if="bounceMode === 'idle'"
+          class="w-3 h-3 rounded-full bg-neon-cyan animate-bounce2-once"
+        ></div>
+        <div v-else class="w-3 h-3 rounded-full bg-neon-cyan"></div>
+
+        <div
+          v-if="bounceMode === 'playing'"
+          class="w-3 h-3 rounded-full bg-neon-orange animate-bounce3-loop"
+        ></div>
+        <div
+          v-else-if="bounceMode === 'idle'"
+          class="w-3 h-3 rounded-full bg-neon-orange animate-bounce3-once"
+        ></div>
+        <div v-else class="w-3 h-3 rounded-full bg-neon-orange"></div>
       </div>
       <span class="font-heading font-bold text-sm md:text-lg uppercase tracking-wider gradient-text truncate">
         Music Prompt Box
@@ -69,3 +138,57 @@ function openAddModal() {
     <StyleFormModal v-if="showAddModal" @close="showAddModal = false" />
   </header>
 </template>
+
+<style scoped>
+/*
+  Bounce keyframes — spring-like feel with 2 rebounds per bounce.
+  3 balls fire sequentially within a 3s cycle.
+  Amplitude decreases: ball1(-8px) → ball2(-6px) → ball3(-4px)
+  Each ball: rise → fall → rebound → fall → micro-rebound → settle
+*/
+
+@keyframes bounce1 {
+  0%    { transform: translateY(0); }
+  4%    { transform: translateY(-8px); }
+  9%    { transform: translateY(0); }
+  12%   { transform: translateY(-3px); }
+  15%   { transform: translateY(0); }
+  17%   { transform: translateY(-1px); }
+  19%   { transform: translateY(0); }
+  100%  { transform: translateY(0); }
+}
+
+@keyframes bounce2 {
+  0%    { transform: translateY(0); }
+  33%   { transform: translateY(0); }
+  37%   { transform: translateY(-6px); }
+  42%   { transform: translateY(0); }
+  45%   { transform: translateY(-2px); }
+  48%   { transform: translateY(0); }
+  50%   { transform: translateY(-0.5px); }
+  52%   { transform: translateY(0); }
+  100%  { transform: translateY(0); }
+}
+
+@keyframes bounce3 {
+  0%    { transform: translateY(0); }
+  65%   { transform: translateY(0); }
+  69%   { transform: translateY(-4px); }
+  74%   { transform: translateY(0); }
+  77%   { transform: translateY(-1.5px); }
+  80%   { transform: translateY(0); }
+  82%   { transform: translateY(-0.5px); }
+  84%   { transform: translateY(0); }
+  100%  { transform: translateY(0); }
+}
+
+/* Idle: single 3s cycle */
+.animate-bounce1-once { animation: bounce1 3s linear; }
+.animate-bounce2-once { animation: bounce2 3s linear; }
+.animate-bounce3-once { animation: bounce3 3s linear; }
+
+/* Playing: infinite loop */
+.animate-bounce1-loop { animation: bounce1 3s linear infinite; }
+.animate-bounce2-loop { animation: bounce2 3s linear infinite; }
+.animate-bounce3-loop { animation: bounce3 3s linear infinite; }
+</style>

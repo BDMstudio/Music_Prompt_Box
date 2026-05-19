@@ -5,9 +5,11 @@ import HotTags from '../tags/HotTags.vue'
 import StyleGrid from '../cards/StyleGrid.vue'
 import { useStylesStore } from '@/stores/styles'
 import { useGenresStore } from '@/stores/genres'
+import { useAudio } from '@/composables/useAudio'
 
 const stylesStore = useStylesStore()
 const genresStore = useGenresStore()
+const { isPlaying } = useAudio()
 
 const title = computed(() => {
   if (genresStore.selectedGenre) {
@@ -18,6 +20,10 @@ const title = computed(() => {
 
 const subtitle = computed(() => {
   return `> 共 ${stylesStore.total} 个风格`
+})
+
+const contentClass = computed(() => {
+  return isPlaying.value ? 'pb-16' : ''
 })
 
 function handleSearch(query: string) {
@@ -37,7 +43,7 @@ watch(() => stylesStore.page, () => {
       <div class="absolute bottom-0 left-0 right-0 h-[300px] perspective-grid opacity-20"></div>
     </div>
 
-    <div class="relative z-10">
+    <div class="relative z-10" :class="contentClass">
       <!-- Title area -->
       <div class="mb-6">
         <div class="flex items-end justify-between mb-4">

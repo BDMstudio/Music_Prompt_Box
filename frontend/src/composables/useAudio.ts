@@ -1,13 +1,20 @@
-import { ref, onUnmounted } from 'vue'
+import { ref, watch, onUnmounted } from 'vue'
 import type { Style } from '@/types'
 
 const globalAudio = new Audio()
 const currentPlayingId = ref<string | null>(null)
+const currentStyle = ref<Style | null>(null)
 const isPlaying = ref(false)
+const currentTime = ref(0)
+const duration = ref(0)
+
+// ── Audio event listeners ──
 
 globalAudio.addEventListener('ended', () => {
   currentPlayingId.value = null
+  currentStyle.value = null
   isPlaying.value = false
+  currentTime.value = 0
 })
 
 globalAudio.addEventListener('pause', () => {
@@ -16,6 +23,18 @@ globalAudio.addEventListener('pause', () => {
 
 globalAudio.addEventListener('play', () => {
   isPlaying.value = true
+})
+
+globalAudio.addEventListener('timeupdate', () => {
+  currentTime.value = globalAudio.currentTime
+})
+
+globalAudio.addEventListener('loadedmetadata', () => {
+  duration.value = globalAudio.duration || 0
+})
+
+globalAudio.addEventListener('durationchange', () => {
+  duration.value = globalAudio.duration || 0
 })
 
 /**
@@ -38,6 +57,7 @@ export function useAudio() {
     if (currentPlayingId.value === id && !globalAudio.paused) {
       globalAudio.pause()
       currentPlayingId.value = null
+      currentStyle.value = null
       return
     }
 
@@ -49,6 +69,7 @@ export function useAudio() {
   function playStyle(style: Style) {
     const url = resolveAudioUrl(style)
     if (!url) return
+    currentStyle.value = style
     play(style.id, url)
   }
 
@@ -56,6 +77,13 @@ export function useAudio() {
     globalAudio.pause()
     globalAudio.currentTime = 0
     currentPlayingId.value = null
+    currentStyle.value = null
+  }
+
+  function seek(time: number) {
+    if (globalAudio.duration) {
+      globalAudio.currentTime = Math.max(0, Math.min(time, globalAudio.duration))
+    }
   }
 
   function isCurrentlyPlaying(id: string): boolean {
@@ -64,10 +92,14 @@ export function useAudio() {
 
   return {
     currentPlayingId,
+    currentStyle,
     isPlaying,
+    currentTime,
+    duration,
     play,
     playStyle,
     stop,
+    seek,
     isCurrentlyPlaying,
     resolveAudioUrl,
   }

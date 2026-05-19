@@ -3,6 +3,7 @@ import { onMounted } from 'vue'
 import AppHeader from './components/layout/AppHeader.vue'
 import AppSidebar from './components/layout/AppSidebar.vue'
 import AppMain from './components/layout/AppMain.vue'
+import AudioPlayerBar from './components/common/AudioPlayerBar.vue'
 import Toast from './components/common/Toast.vue'
 import { useGenresStore } from './stores/genres'
 import { useStylesStore } from './stores/styles'
@@ -44,5 +45,8 @@ onMounted(async () => {
       </div>
       <Toast />
     </div>
+
+    <!-- Global audio player — fixed at bottom of viewport -->
+    <AudioPlayerBar />
   </div>
 </template>
